@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>NeroviaFlow – User Manual & Dashboard Guide | Facility Manager One‑Pager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f4f6fa;
+            color: #1a2c3e;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1.75rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            padding: 2rem 2rem 2rem 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0a1a3a, #1e4a76);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.25rem;
+        }
+
+        .subhead {
+            color: #2c5a7a;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+            margin: 0.5rem 0 1.5rem 0;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            color: #0f2b4f;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.4rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .card {
+            background: #f9fafc;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            border: 1px solid #eef2f8;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #0a1a3a;
+            border-left: 3px solid #3b82f6;
+            padding-left: 0.6rem;
+        }
+
+        .badge {
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+            display: inline-block;
+            margin-right: 0.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .step {
+            margin: 1rem 0 0.5rem 0;
+            padding-left: 1.2rem;
+            border-left: 3px solid #10b981;
+        }
+        .step strong {
+            color: #0f2b4f;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin: 0.8rem 0;
+        }
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 0.5rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #f1f5f9;
+            font-weight: 600;
+        }
+
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+            padding-top: 1.5rem;
+        }
+
+        @media (max-width: 800px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .container { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>NeroviaFlow – User Manual & Dashboard Guide</h1>
+    <div class="subhead">For hotel facility managers – Monitor water consumption, detect leaks, generate reports, and manage alerts – Version 1.0</div>
+
+    <!-- Introduction -->
+    <div class="section-title">🔍 What is the NeroviaFlow dashboard?</div>
+    <p>The NeroviaFlow dashboard is your central command for water intelligence. It displays real‑time flow and pressure data, alerts you when a leak is detected, and provides historical reports for ESG compliance and water savings verification. Accessible from any modern web browser (desktop or mobile), the dashboard is designed for quick decision‑making without technical training.</p>
+
+    <!-- Getting started -->
+    <div class="section-title">🚀 Getting started – first login</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Login credentials</h3>
+            <p>After installation, you will receive an email from <code>no-reply@neroviaflow.com</code> with a temporary password. Use the following URL:<br>
+            <strong>https://dashboard.neroviaflow.com</strong><br>
+            <span class="badge">Username</span> Your hotel site ID (e.g., CAS‑HOTEL‑001)<br>
+            <span class="badge">Password</span> Temporary (change on first login)</p>
+        </div>
+        <div class="card">
+            <h3>Dashboard tour (first view)</h3>
+            <p>After login, you will see:<br>
+            • Top bar: site selector, date range, user menu.<br>
+            • Main area: live flow & pressure charts.<br>
+            • Right sidebar: recent alerts summary.<br>
+            • Bottom: consumption totals for today/week/month.</p>
+        </div>
+    </div>
+
+    <!-- Live monitoring -->
+    <div class="section-title">📊 Live monitoring – understanding the charts</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Flow rate (L/h)</h3>
+            <p>The blue line shows water flow every 15 minutes. A horizontal dashed line indicates the expected baseline for that time of day (based on 30‑day learning). If the blue line stays above the baseline during night hours (1‑4 AM), the system will investigate a possible leak.</p>
+        </div>
+        <div class="card">
+            <h3>Pressure (bar)</h3>
+            <p>The green line shows water pressure. A sudden drop of more than 0.3 bar, especially when flow is also high, strongly indicates a leak. The dashboard highlights such events in red.</p>
+        </div>
+        <div class="card">
+            <h3>Acoustic energy (if equipped)</h3>
+            <p>The orange line represents vibration/noise on the pipe. When acoustic energy exceeds baseline during night hours, it adds confidence to leak detection.</p>
+        </div>
+        <div class="card">
+            <h3>Baseline learning period</h3>
+            <p>For the first 30 days after installation, the system is in “learning mode”. No alerts will be sent. You can still view data, but the baseline is being established. A progress bar shows remaining days.</p>
+        </div>
+    </div>
+
+    <!-- Alerts management -->
+    <div class="section-title">⚠️ Alerts – what they mean and how to respond</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Alert types</h3>
+            <p><span class="badge">Leak confirmed</span> Red banner: flow anomaly + pressure drop confirmed over 3 consecutive readings. Action: call maintenance, close zone valves to locate leak, then repair.<br>
+            <span class="badge">Potential leak</span> Yellow banner: only one of the conditions (flow or pressure) met. Investigate if repeats.<br>
+            <span class="badge">Sensor offline</span> Gray banner: no data received for >1 hour. Check power or GSM signal.</p>
+        </div>
+        <div class="card">
+            <h3>Alert resolution workflow</h3>
+            <ol style="margin-left: 1.2rem;">
+                <li>Receive SMS and dashboard notification.</li>
+                <li>Open dashboard, click on alert to see details (time, flow deviation, pressure drop).</li>
+                <li>Use zone shutoff valves (hotel internal plumbing) to isolate the leak.</li>
+                <li>After repair, click “Mark as resolved” and enter notes (e.g., “toilet flapper replaced”).</li>
+                <li>System will automatically verify post‑repair consumption (night flow should return to baseline).</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Alert log table</h3>
+        <p>All alerts are stored with timestamps, resolution status, and estimated water loss (litres). You can export the log to CSV for maintenance records.</p>
+        <table>
+            <thead><tr><th>Date & time</th><th>Type</th><th>Flow diff (L/h)</th><th>Pressure drop (bar)</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody>
+                <tr><td>2026‑04‑22 02:15</td><td>Leak confirmed</td><td>+85</td><td>0.42</td><td>Resolved</td><td>View details</td></tr>
+                <tr><td>2026‑04‑20 03:00</td><td>Potential leak</td><td>+32</td><td>0.12</td><td>Investigated</td><td>View</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Reports & ESG -->
+    <div class="section-title">📄 Monthly reports & ESG data</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Generating a report</h3>
+            <p>From the left menu, select <strong>Reports → Monthly</strong>. Choose year and month. Click “Generate PDF”. The report includes:</p>
+            <ul style="margin-left: 1.2rem;">
+                <li>Total water consumption (m³).</li>
+                <li>Estimated water saved (compared to baseline).</li>
+                <li>Leak events and volume lost.</li>
+                <li>CO₂ equivalent avoided (based on energy saved from pumping/treatment).</li>
+                <li>ESG metrics aligned with SDG 6, 11, 13.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>ESG dashboard (Premium tier)</h3>
+            <p>Premium subscribers get an ESG‑dedicated view with year‑to‑date trends, benchmarking against similar hotels, and downloadable data for corporate sustainability reports (GRI, SASB formats).</p>
+        </div>
+    </div>
+
+    <!-- Settings & account management -->
+    <div class="section-title">⚙️ Settings & account management</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Profile & notification preferences</h3>
+            <p>• Change password.<br>
+            • Set up SMS recipients (up to 3 phone numbers).<br>
+            • Choose alert thresholds (advanced users only).<br>
+            • Language: English / French (default).</p>
+        </div>
+        <div class="card">
+            <h3>Billing & subscription</h3>
+            <p>View current plan (Essential / Premium), next invoice date, and payment history. Upgrade directly from the dashboard (Stripe integration).</p>
+        </div>
+        <div class="card">
+            <h3>Site information</h3>
+            <p>Update hotel name, address, contact person. View hardware serial numbers and last maintenance date.</p>
+        </div>
+        <div class="card">
+            <h3>Data export</h3>
+            <p>Export raw readings (CSV) for any date range. Data retention: 24 months.</p>
+        </div>
+    </div>
+
+    <!-- Troubleshooting common issues -->
+    <div class="section-title">🛠️ Troubleshooting – what to do when</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>“No data for last 2 hours”</h3>
+            <p>Possible causes: power outage, GSM network down, SIM credit expired. Check the “Device health” panel (shows battery voltage and last transmission). If battery <3.5V, recharge using USB cable. If SIM credit low, contact NeroviaFlow support.</p>
+        </div>
+        <div class="card">
+            <h3>False alert (no leak found)</h3>
+            <p>Click on the alert and select “Mark as false positive”. The system will ask you to describe the event (e.g., “cooling tower cycled”). This helps improve the algorithm. Your feedback is anonymised.</p>
+        </div>
+        <div class="card">
+            <h3>Pressure reading seems wrong</h3>
+            <p>Verify that the pressure sensor valve is fully open. If still incorrect, contact support – a technician may need to recalibrate or replace the sensor.</p>
+        </div>
+        <div class="card">
+            <h3>Cannot log in</h3>
+            <p>Use “Forgot password” link. If that fails, email support@neroviaflow.com with your site ID. Account recovery within 1 business day.</p>
+        </div>
+    </div>
+
+    <!-- Support & contacts -->
+    <div class="section-title">📞 Support channels</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Email support</h3>
+            <p>support@neroviaflow.com (response within 4 hours on business days, 24h on weekends).</p>
+        </div>
+        <div class="card">
+            <h3>Phone (Premium tier only)</h3>
+            <p>+212 5 22 58 64 14 (dedicated account manager, 9‑18 CET).</p>
+        </div>
+        <div class="card">
+            <h3>Live chat (dashboard)</h3>
+            <p>Click the chat icon at the bottom right (available 8‑20 CET).</p>
+        </div>
+        <div class="card">
+            <h3>Emergency on‑site support</h3>
+            <p>For critical hardware failures, we dispatch a technician within 48 hours (additional fee applies after warranty period).</p>
+        </div>
+    </div>
+
+    <!-- Quick reference card -->
+    <div class="section-title">📌 Quick reference – dashboard icons</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Top bar</h3>
+            <p>🏨 Site selector – switch between multiple hotels (chain accounts).<br>
+            📅 Date range – last 24h, 7 days, 30 days, custom.<br>
+            🔔 Notifications – unread alerts.<br>
+            👤 User menu – profile, logout.</p>
+        </div>
+        <div class="card">
+            <h3>Left sidebar</h3>
+            <p>📊 Dashboard – main view.<br>
+            ⚠️ Alerts – historical log.<br>
+            📈 Reports – generate PDFs.<br>
+            📁 Data export – CSV.<br>
+            ⚙️ Settings – account, billing, site info.<br>
+            ❓ Help – user manual, support.</p>
+        </div>
+    </div>
+
+    <!-- Security & privacy note -->
+    <div class="card" style="background:#eef2ff;">
+        <h3>🔒 Security & privacy</h3>
+        <p>All data transmitted over HTTPS. Your raw operational data is never shared with third parties without consent. Anonymised aggregates are used for research and utility partnerships (you can opt out in settings). Two‑factor authentication (2FA) is available for enterprise accounts.</p>
+    </div>
+
+    <!-- Version & update info -->
+    <div class="footer-note">
+        🔹 NeroviaFlow Dashboard – User Manual v1.0 · April 2026 · For facility managers and hotel staff.<br>
+        This document will be updated as new features are released. Check the “What’s new” section in the dashboard for recent changes.
+    </div>
+</div>
+
+<!-- Back to Index Button -->
+<div style="text-align: center; margin-top: 2rem; padding: 1rem;">
+    <a href="../index.html" style="display: inline-block; background: #0a192f; color: white; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 500; padding: 0.6rem 1.5rem; border-radius: 2rem; font-size: 0.8rem; border: 1px solid #2563eb; transition: 0.2s;">← Back to all documents</a>
+</div>
+</body>
+</html>

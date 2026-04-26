@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>NeroviaFlow – Software Specifications & Architecture | Investor One‑Pager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f4f6fa;
+            color: #1a2c3e;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1.75rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            padding: 2rem 2rem 2rem 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0a1a3a, #1e4a76);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.25rem;
+        }
+
+        .subhead {
+            color: #2c5a7a;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+            margin: 0.5rem 0 1.5rem 0;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            color: #0f2b4f;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.4rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .card {
+            background: #f9fafc;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            border: 1px solid #eef2f8;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #0a1a3a;
+            border-left: 3px solid #3b82f6;
+            padding-left: 0.6rem;
+        }
+
+        .badge {
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+            display: inline-block;
+            margin-right: 0.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin: 0.8rem 0;
+        }
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 0.5rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #f1f5f9;
+            font-weight: 600;
+        }
+        code {
+            background: #eef2ff;
+            padding: 0.1rem 0.3rem;
+            border-radius: 0.3rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+        }
+        .diagram {
+            background: #f8fafc;
+            border: 1px dashed #94a3b8;
+            border-radius: 0.8rem;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.7rem;
+            white-space: pre;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+            padding-top: 1.5rem;
+        }
+        .color-swatch {
+            display: inline-block;
+            width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 0.2rem;
+            vertical-align: middle;
+            margin-right: 0.3rem;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        @media (max-width: 800px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .container { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>NeroviaFlow – Software Specifications & Architecture</h1>
+    <div class="subhead">Investor‑grade technical one‑pager – Cloud, firmware, API, detection logic, and data pipeline – Confidential</div>
+
+    <!-- Overview -->
+    <div class="section-title">📡 System overview (software layer)</div>
+    <p style="margin-bottom:1rem;">The NeroviaFlow software stack is a cloud‑native, event‑driven system that ingests real‑time sensor data from field devices (ESP32 + GSM), stores it in a time‑series database, runs detection algorithms, and delivers alerts and dashboards to end‑users. It is designed for low‑latency, high‑reliability, and cost‑effective scaling from 15 to 10,000+ sites.</p>
+    <div class="diagram">
+┌─────────────────────────────────────────────────────────────────────────┐
+│                           FIELD DEVICE (ESP32)                          │
+│  - Reads flow meter (4‑20mA / pulse) & pressure sensor (4‑20mA)        │
+│  - Optional acoustic sensor (analog/digital)                           │
+│  - 30‑day baseline learning (on‑device rolling averages)               │
+│  - Deep sleep between readings (15 min intervals)                      │
+│  - GSM module (SIM800L) sends HTTP POST to cloud gateway               │
+└───────────────────────────────┬─────────────────────────────────────────┘
+                                │ HTTPS / MQTT (planned)
+                                ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                      CLOUD GATEWAY (FastAPI)                            │
+│  - Authentication & device registration                                │
+│  - Request validation & rate limiting                                  │
+│  - Ingestion endpoint: POST /api/readings                              │
+└───────────────────────────────┬─────────────────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    TIME‑SERIES DATABASE (Supabase / PostgreSQL +       │
+│                                    TimescaleDB)                         │
+│  - Table `readings`: site_id, flow_lph, pressure_bar, acoustic_energy, │
+│    day_of_week, slot, baseline_ok, created_at                          │
+│  - Table `baselines`: site_id, day, slot, flow_baseline, pressure_base,│
+│    acoustic_base, sample_count, last_updated                           │
+│  - Table `alerts`: id, site_id, detected_at, confirmed_at, flow_diff,  │
+│    pressure_diff, acoustic_diff, resolved_at                           │
+└───────────────────────────────┬─────────────────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                  DETECTION & ALERT ENGINE (Python / FastAPI background)│
+│  - Night‑window processor (01:00‑04:00 UTC)                            │
+│  - Dual‑sensor (flow+pressure) confirmation (≥3 consecutive readings) │
+│  - Optional acoustic enhancement (third‑sensor voting)                 │
+│  - SMS dispatcher via GSM modem / Twilio                              │
+│  - Real‑time dashboard data aggregator                                 │
+└───────────────────────────────┬─────────────────────────────────────────┘
+                                │
+                                ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                    FRONTEND DASHBOARD (React / Next.js)                 │
+│  - Live flow & pressure charts (Chart.js)                              │
+│  - Historical consumption trends (day, week, month)                    │
+│  - Alert log & leak resolution workflow                                │
+│  - Monthly PDF report generator (ESG, savings, water volume)           │
+│  - Admin panel for site management & user roles                        │
+└─────────────────────────────────────────────────────────────────────────┘
+    </div>
+
+    <!-- Firmware (ESP32) -->
+    <div class="section-title">⚙️ Firmware (ESP32) – core intelligence</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>🔁 Main loop & power management</h3>
+            <p><span class="badge">Deep sleep</span> 99% of time, wake every 15 min.<br>
+            <span class="badge">Sensor power</span> MOSFET‑controlled to save battery.<br>
+            <span class="badge">GSM activation</span> only during transmission.<br>
+            <span class="badge">Baseline arrays</span> 7 (days) × 96 (slots) stored in RTC memory.</p>
+        </div>
+        <div class="card">
+            <h3>📊 Detection logic (on‑device)</h3>
+            <p>Flow and pressure readings are averaged over the 15‑min window.<br>
+            Night‑window flag (1‑4 AM) is evaluated locally.<br>
+            If <code>flow > baseline_flow + threshold</code> AND <code>pressure < baseline_pressure - threshold</code> for 3 consecutive slots → leak confirmed.<br>
+            Immediate SMS via GSM + store‑and‑forward if network unavailable.</p>
+        </div>
+        <div class="card">
+            <h3>🔧 Over‑the‑air (OTA) updates</h3>
+            <p>Firmware version check every 24h via GSM. Binary delta updates (~20 kB) to minimise data usage.<br>
+            Fallback to factory firmware in case of corrupted update.</p>
+        </div>
+        <div class="card">
+            <h3>📡 Data transmission format</h3>
+            <p>JSON payload:</p>
+            <code>{
+  "site_id": "CAS‑HOTEL‑001",
+  "flow_lph": 1240.5,
+  "pressure_bar": 3.87,
+  "acoustic_energy": 0.23,
+  "day": 2,
+  "slot": 47,
+  "baseline_ready": true,
+  "battery_voltage": 3.9,
+  "timestamp": "2026‑04‑22T02:15:00Z"
+}</code>
+        </div>
+    </div>
+
+    <!-- Cloud backend (API & database) -->
+    <div class="section-title">☁️ Cloud backend – API & database</div>
+    <table>
+        <thead><tr><th>Component</th><th>Technology / Implementation</th></tr></thead>
+        <tbody>
+            <tr><td>API framework</td><td>FastAPI (Python) – asynchronous, auto‑generated OpenAPI docs, high throughput.</td></tr>
+            <tr><td>Database</td><td>Supabase (PostgreSQL + TimescaleDB extension) – managed, scalable, row‑level security.</td></tr>
+            <tr><td>Authentication</td><td>JWT tokens + API keys for devices; Supabase Auth for dashboard users.</td></tr>
+            <tr><td>Rate limiting</td><td>100 requests / minute per site (burst protection).</td></tr>
+            <tr><td>Data retention</td><td>Raw readings kept for 24 months; aggregated data kept indefinitely.</td></tr>
+        </tbody>
+    </table>
+
+    <div class="card" style="margin-top:0.5rem;">
+        <h3>📥 Ingestion endpoint – POST /api/readings</h3>
+        <p>Validates payload, computes derived fields (baseline deviation, leak score), inserts into `readings` table, triggers detection engine asynchronously. Returns HTTP 202 Accepted immediately.</p>
+        <p>Example response:</p>
+        <code>{"status":"accepted","id":"6d8e9f1a‑..."}</code>
+    </div>
+
+    <!-- Detection algorithm details (proprietary but functional description) -->
+    <div class="section-title">🧠 Leak detection algorithm – multi‑sensor confirmation</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Baseline establishment</h3>
+            <p>After 30 days, for each (day_of_week, slot) the system stores:
+            <br>• <strong>μ_flow</strong> (mean) and <strong>σ_flow</strong> (standard deviation)
+            <br>• <strong>μ_pressure</strong> and <strong>σ_pressure</strong>
+            <br>• Optional acoustic baseline μ_acoustic, σ_acoustic.
+            <br>Thresholds are dynamic: <code>threshold_flow = μ_flow + 2 × σ_flow</code> (approx 95th percentile).</p>
+        </div>
+        <div class="card">
+            <h3>Night‑window detection (core)</h3>
+            <p>During 1‑4 AM, every 15 min the device sends data. The cloud engine:</p>
+            <ol style="margin-left: 1.2rem;">
+                <li>Compares flow, pressure against baselines.</li>
+                <li>If flow deviation > threshold AND pressure drop > threshold → leak suspect.</li>
+                <li>Increment consecutive counter. After 3 consecutive suspects → leak confirmed.</li>
+                <li>Insert alert record, send SMS via Twilio / GSM gateway.</li>
+            </ol>
+        </div>
+        <div class="card">
+            <h3>Acoustic enhancement (optional)</h3>
+            <p>When acoustic sensor is present, a third condition is added: acoustic energy > baseline + threshold. A leak is confirmed only when <strong>at least two of the three sensors</strong> indicate anomaly (flow+pressure or flow+acoustic or pressure+acoustic). This eliminates false positives from silent leaks.</p>
+        </div>
+        <div class="card">
+            <h3>False‑positive mitigation</h3>
+            <p>• Consecutive readings requirement (3).<br>
+            • Pressure drop must be sustained (not a spike).<br>
+            • Baseline is updated weekly (moving average) to adapt to seasonal changes.<br>
+            • Manual override: facility manager can mark an alert as false; that event is fed back to refine thresholds.</p>
+        </div>
+    </div>
+
+    <!-- Dashboard & user interface -->
+    <div class="section-title">📊 Frontend dashboard – React / Next.js</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Live monitoring</h3>
+            <p>• Real‑time flow (L/h) and pressure (bar) graphs using WebSocket updates.<br>
+            • Current consumption vs baseline comparison (coloured bars).<br>
+            • Battery voltage indicator and last transmission time.</p>
+        </div>
+        <div class="card">
+            <h3>Alerts & leak resolution</h3>
+            <p>• List of active and historical alerts with timestamps.<br>
+            • Each alert shows flow deviation, pressure drop, acoustic energy (if available).<br>
+            • Resolution workflow: “Leak fixed” button, after which system monitors post‑repair consumption.</p>
+        </div>
+        <div class="card">
+            <h3>Reporting (ESG & monthly PDF)</h3>
+            <p>• Automatically generated monthly PDF: total consumption, leak volume, savings, CO₂ equivalent avoided.<br>
+            • Downloadable CSV of raw data for 12 months.<br>
+            • ESG metrics aligned with SDG 6, 11, 13.</p>
+        </div>
+        <div class="card">
+            <h3>Admin panel (NeroviaFlow internal)</h3>
+            <p>• Site management (add, edit, delete).<br>
+            • Device health monitoring (last seen, battery level, GSM signal strength).<br>
+            • Firmware version management and OTA push.<br>
+            • Billing integration (Stripe) – subscription management.</p>
+        </div>
+    </div>
+
+    <!-- Database schema (simplified) -->
+    <div class="section-title">🗄️ Database schema (key tables)</div>
+    <table>
+        <thead><tr><th>Table</th><th>Columns</th><th>Indexes</th></tr></thead>
+        <tbody>
+            <tr><td><code>readings</code></td><td>id, site_id, flow_lph, pressure_bar, acoustic_energy, day, slot, baseline_ok, created_at</td><td>(site_id, created_at DESC), (site_id, day, slot)</td></tr>
+            <tr><td><code>baselines</code></td><td>site_id, day, slot, flow_mean, flow_std, pressure_mean, pressure_std, acoustic_mean, acoustic_std, sample_count, updated_at</td><td>(site_id, day, slot) UNIQUE</td></tr>
+            <tr><td><code>alerts</code></td><td>id, site_id, detected_at, confirmed_at, flow_diff, pressure_diff, acoustic_diff, resolved_at, resolution_notes</td><td>(site_id, detected_at)</td></tr>
+            <tr><td><code>sites</code></td><td>id, name, location, contact_phone, subscription_tier, install_date, hardware_version</td><td>id PRIMARY KEY</td></tr>
+        </tbody>
+    </table>
+
+    <!-- ========== UI/UX DESIGN SECTION ========== -->
+    <div class="section-title">🎨 UI/UX Design – Dashboard & admin experience</div>
+
+    <!-- 1. Identité visuelle -->
+    <div class="grid-2">
+        <div class="card">
+            <h3>🎨 Color palette</h3>
+            <p><span class="color-swatch" style="background:#0f2b4f;"></span> <strong>Primary</strong> #0f2b4f (navy) – headers, primary buttons, active states<br>
+            <span class="color-swatch" style="background:#3b82f6;"></span> <strong>Accent</strong> #3b82f6 (blue) – links, hover states, alerts<br>
+            <span class="color-swatch" style="background:#10b981;"></span> <strong>Success</strong> #10b981 – leak‑free status, positive indicators<br>
+            <span class="color-swatch" style="background:#ef4444;"></span> <strong>Danger</strong> #ef4444 – leak alerts, critical warnings<br>
+            <span class="color-swatch" style="background:#f59e0b;"></span> <strong>Warning</strong> #f59e0b – potential leak, attention<br>
+            <span class="color-swatch" style="background:#f9fafb;"></span> <strong>Background</strong> #f9fafb – card backgrounds, main content area<br>
+            <span class="color-swatch" style="background:#1e293b;"></span> <strong>Text primary</strong> #1e293b – high contrast for readability<br>
+            <span class="color-swatch" style="background:#64748b;"></span> <strong>Text secondary</strong> #64748b – labels, timestamps</p>
+        </div>
+        <div class="card">
+            <h3>🔤 Typography</h3>
+            <p><span class="badge">Font family</span> Inter (system‑ui, sans‑serif)<br>
+            <span class="badge">Dashboard titles</span> SemiBold (600), 1.5rem<br>
+            <span class="badge">Card headers</span> SemiBold, 1.25rem<br>
+            <span class="badge">Body text</span> Regular (400), 0.875rem<br>
+            <span class="badge">Monospace</span> 'Courier New' for sensor readings and timestamps</p>
+        </div>
+        <div class="card">
+            <h3>🖼️ Iconography & branding</h3>
+            <p>Simple, line‑based icons (Lucide / Heroicons) for actions: alert bell, water drop, pressure gauge, download, settings. Logo: minimal water drop + wave symbol. No emojis in interface – all vector icons for consistency across devices.</p>
+        </div>
+        <div class="card">
+            <h3>🌡️ Tonalité & mood</h3>
+            <p>Professional, data‑driven, calm. No aggressive reds except for confirmed leaks. Use of soft blues and greens to convey trust and efficiency. Micro‑interactions (hover, transitions) to make the dashboard feel responsive without being distracting.</p>
+        </div>
+    </div>
+
+    <!-- 2. Composants UI spécifiques -->
+    <div class="section-title" style="margin-top:1rem;">🧩 Core UI components</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>📊 Live charts (Chart.js)</h3>
+            <p>Flow (L/h) and pressure (bar) displayed as interactive line charts. Baseline shown as dashed line. Colour‑coded zones (green = normal, orange = suspicious, red = leak confirmed). Tooltips on hover show exact values and timestamps.</p>
+        </div>
+        <div class="card">
+            <h3>⚠️ Alert cards</h3>
+            <p>Each alert appears as a card with priority colour, timestamp, leak type (flow anomaly, pressure drop, acoustic), and action buttons ("View details", "Mark resolved"). Dismissible after review. High‑priority alerts also trigger a modal with guided troubleshooting steps.</p>
+        </div>
+        <div class="card">
+            <h3>📋 Monthly report generator</h3>
+            <p>Button "Generate PDF" opens a modal with date range selection, site selection (single hotel or group), and options to include ESG metrics, water savings, and CO₂ equivalent. Preview before download. Background generation for large portfolios.</p>
+        </div>
+        <div class="card">
+            <h3>🔧 Device health panel</h3>
+            <p>Compact widget showing battery voltage, GSM signal strength, last transmission time, and firmware version. Colour indicators: green (healthy), orange (attention needed), red (offline). Click to open detailed device log.</p>
+        </div>
+        <div class="card">
+            <h3>🛠️ Admin controls</h3>
+            <p>Buttons for OTA firmware update, device reboot, remote calibration, and SIM management. Confirmation modal required for destructive actions. Bulk operations (e.g., update multiple devices) available for enterprise users.</p>
+        </div>
+        <div class="card">
+            <h3>🌙 Dark mode (planned)</h3>
+            <p>Automatic switching based on system preference. Dark palette: navy background, light text, muted alert colours. Implemented via CSS custom properties and class toggle.</p>
+        </div>
+    </div>
+
+    <!-- 3. Architecture d’écrans (dashboard & admin) -->
+    <div class="section-title">📱 Screen architecture – Facility manager dashboard</div>
+    <div class="diagram">
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  LOGIN SCREEN                                                              │
+│  - Email / password + "Remember me"                                        │
+│  - Forgot password flow (reset link to email)                              │
+│  - Optional SSO (Google / Microsoft) for enterprise clients               │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  MAIN DASHBOARD (after login)                                              │
+│  - Top bar: site selector (dropdown), date range picker, user menu        │
+│  - Left sidebar: navigation (Dashboard, Alerts, Reports, Data Export, Settings)│
+│  - Main area: live flow & pressure charts, alert summary widget           │
+│  - KPI cards: today's consumption, leak status, water saved this month    │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  ALERTS PAGE                                                               │
+│  - Table with columns: time, type, severity, status, actions              │
+│  - Filters (date, severity, resolved/unresolved)                          │
+│  - Click on an alert to open detail view with sensor graphs at the time of leak│
+│  - Resolution workflow: mark as resolved → optional note → system verifies│
+├─────────────────────────────────────────────────────────────────────────────┤
+│  REPORTS PAGE                                                              │
+│  - Date range selector (monthly, quarterly, custom)                        │
+│  - Generate PDF / CSV with water consumption, leak events, savings        │
+│  - ESG tab: CO₂ avoided, trees equivalent, alignment with SDG 6, 11, 13  │
+│  - Historical reports archive for download                                 │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  ADMIN PANEL (super‑user only)                                             │
+│  - Site management: add/remove hotels, assign hardware, set thresholds    │
+│  - Device list: status, last seen, firmware version, battery level        │
+│  - OTA firmware upload & rollout (per site or batch)                      │
+│  - Billing: subscription plans, invoice history, payment method           │
+│  - User roles: facility manager, owner, admin – permissions matrix        │
+└─────────────────────────────────────────────────────────────────────────────┘
+    </div>
+
+    <!-- 4. Responsive & accessibilité -->
+    <div class="section-title">📐 Responsive & accessibility (WCAG 2.1 AA)</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>📱 Responsive behaviour</h3>
+            <p>Desktop‑first design, but collapses gracefully on tablets and phones.<br>
+            <span class="badge">Tablet</span> charts resize, sidebar becomes collapsible.<br>
+            <span class="badge">Mobile</span> bottom navigation bar, charts stacked vertically, modals full screen.<br>
+            Touch‑friendly: tap targets ≥44px, swipe gestures for alerts.</p>
+        </div>
+        <div class="card">
+            <h3>♿ Accessibility features</h3>
+            <p>• Colour contrast ratio ≥4.5:1 for text against background.<br>
+            • ARIA labels on all interactive elements.<br>
+            • Keyboard navigable: Tab, Shift+Tab, Enter, Escape.<br>
+            • Focus indicators visible (outline).<br>
+            • Screen reader friendly: headings, landmarks, alt text for charts.</p>
+        </div>
+        <div class="card">
+            <h3>🌐 Localisation (i18n)</h3>
+            <p>Interface strings in English and French, detected via browser language or user toggle. Dates and numbers formatted according to locale (MM/DD vs DD/MM). RTL support not required for now.</p>
+        </div>
+        <div class="card">
+            <h3>⏱️ Performance targets</h3>
+            <p>First Contentful Paint < 1.5s, Time to Interactive < 3s. Charts lazy‑loaded. Data tables paginated. Asset caching via service worker for offline fallback.</p>
+        </div>
+    </div>
+
+    <!-- 5. Utilisateur type (facility manager) -->
+    <div class="section-title">🧭 User flow – Hotel facility manager</div>
+    <div class="diagram">
+1. Facility manager receives SMS alert about a potential leak → clicks link to open dashboard (auto‑login if session active).
+2. Dashboard shows red alert card with leak details (flow deviation, pressure drop, time).
+3. Manager clicks "View details" → sees live charts with the leak window highlighted.
+4. Follows guided troubleshooting (e.g., "Is the cooling tower running?" / "Check zone valve").
+5. After repair, marks alert as resolved and enters notes (e.g., "replaced toilet flapper").
+6. System automatically verifies that night flow returns to baseline → closes alert.
+7. At month end, manager generates an ESG report (PDF) to share with hotel ownership, showing water saved and CO₂ avoided.
+    </div>
+
+    <!-- 6. Future UI/UX enhancements -->
+    <div class="section-title">🚀 Planned UI/UX improvements (2027‑2028)</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>🔮 Predictive leak heatmap</h3>
+            <p>Machine learning model overlay on building floor plan showing zones with high leak probability based on pressure and flow anomalies.</p>
+        </div>
+        <div class="card">
+            <h3>📱 Mobile app (iOS / Android)</h3>
+            <p>Native push notifications, offline mode, simplified dashboard for quick checks. Wrapper around the PWA with extra device features.</p>
+        </div>
+        <div class="card">
+            <h3>🔔 Smart alert routing</h3>
+            <p>Route alerts based on severity and time: SMS for critical leaks, email for minor anomalies, WhatsApp for maintenance team.</p>
+        </div>
+        <div class="card">
+            <h3>📊 Multi‑site benchmarking</h3>
+            <p>Comparative water efficiency score across hotels, with industry average overlay. Gamification (awards for lowest water waste).</p>
+        </div>
+        <div class="card">
+            <h3>🕊️ White‑label dashboard (enterprise)</h3>
+            <p>Ability to replace logo, colours, and domain for large hotel chains (e.g., Accor, Hilton).</p>
+        </div>
+        <div class="card">
+            <h3>🔗 Integration with third‑party BMS (Building Management Systems)</h3>
+            <p>REST API to export alerts and consumption data to existing BMS (Siemens, Honeywell). UI to configure API keys and webhooks.</p>
+        </div>
+    </div>
+
+    <div class="card" style="background:#eef2ff; margin-top:1rem;">
+        <h3>💡 Why UI/UX is a competitive advantage</h3>
+        <ul style="margin-left: 1.5rem;">
+            <li>✅ Facility managers save time – alerts are clear, actionable, and include context.</li>
+            <li>✅ Zero‑false‑alarm promise reinforced by visual confirmation (pressure + flow graphs).</li>
+            <li>✅ ESG reporting automates what would otherwise be manual data collection – a key selling point.</li>
+            <li>✅ Admin panel allows efficient scaling to thousands of sites without increasing support headcount.</li>
+            <li>✅ Mobile‑friendly design ensures alerts are actionable from anywhere (hotel basement, office, or remote).</li>
+        </ul>
+    </div>
+
+    <!-- Security & compliance -->
+    <div class="section-title">🔒 Security & compliance</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Data in transit</h3>
+            <p>• TLS 1.3 for all HTTPS connections.<br>
+            • Device ↔ Cloud: mutual authentication using pre‑shared API keys (rotated monthly).<br>
+            • GSM bearer: encrypted GPRS (operator‑grade).</p>
+        </div>
+        <div class="card">
+            <h3>Data at rest</h3>
+            <p>• AES‑256 encryption for database at rest.<br>
+            • Client raw data never leaves EU region (Supabase EU).<br>
+            • Anonymisation pipeline for data monetisation: irreversible aggregation (no site‑level identifiers).</p>
+        </div>
+        <div class="card">
+            <h3>Compliance</h3>
+            <p>• Moroccan Law 09‑08: data processing agreement with each client, CNDP declaration.<br>
+            • GDPR‑style: right to erasure, data portability.<br>
+            • Audit logs of all data access.</p>
+        </div>
+        <div class="card">
+            <h3>Backup & disaster recovery</h3>
+            <p>• Daily automated backups (7‑day retention).<br>
+            • Cross‑region replication for critical metadata.<br>
+            • RTO < 4 hours, RPO < 1 hour.</p>
+        </div>
+    </div>
+
+    <!-- Data monetisation pipeline -->
+    <div class="section-title">💸 Data monetisation pipeline (anonymisation & aggregation)</div>
+    <div class="diagram">
+Raw readings (site‑level) → Anonymisation service (remove site_id, randomise timestamps) → Aggregation by region, hotel size, month → Dataset for utilities/researchers → API access / flat file export.
+    </div>
+    <p>Aggregated datasets are sold to water utilities (LYDEC, ONEE) for infrastructure planning, to researchers for academic studies, and to infrastructure funds for risk assessment. Pricing: <strong>$30/site/month</strong> starting from 2028 (50+ sites).</p>
+
+    <!-- Future enhancements -->
+    <div class="section-title">🚀 Planned software enhancements (2026‑2028)</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>MQTT protocol</h3>
+            <p>Replace HTTP with MQTT for lower power consumption and better scalability (expected Q3 2026).</p>
+        </div>
+        <div class="card">
+            <h3>Machine learning predictions</h3>
+            <p>Train anomaly detection model on aggregated dataset to predict leaks before they happen (pressure drop trend analysis).</p>
+        </div>
+        <div class="card">
+            <h3>Multi‑site portfolio dashboard</h3>
+            <p>For hotel chains: consolidated view of all properties, benchmarking, and automated group ESG reporting.</p>
+        </div>
+        <div class="card">
+            <h3>Integration with building management systems</h3>
+            <p>REST API for third‑party BMS (Siemens, Honeywell) to ingest leak alerts and consumption data.</p>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        🔹 NeroviaFlow – Software Specifications & Architecture · April 2026 · Confidential – For investors and technical partners.<br>
+        Full source code repositories (firmware, backend, frontend) are available under NDA for due diligence.
+    </div>
+</div>
+
+<!-- Back to Index Button -->
+<div style="text-align: center; margin-top: 2rem; padding: 1rem;">
+    <a href="../index.html" style="display: inline-block; background: #0a192f; color: white; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 500; padding: 0.6rem 1.5rem; border-radius: 2rem; font-size: 0.8rem; border: 1px solid #2563eb; transition: 0.2s;">← Back to all documents</a>
+</div>
+</body>
+</html>

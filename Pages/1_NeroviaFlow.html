@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>NeroviaFlow – Water Intelligence for Hotels</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1a1f2e;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0a1a3a 0%, #0f2b4f 100%);
+            color: white;
+            border-radius: 1.5rem;
+            padding: 3rem 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 1.8rem;
+            border-left: 3px solid #3b82f6;
+            padding-left: 1.2rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: #3b82f6;
+            padding: 0.3rem 0.9rem;
+            border-radius: 2rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid white;
+            margin-left: 1rem;
+        }
+
+        .btn:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+        }
+
+        .section {
+            background: white;
+            border-radius: 1.25rem;
+            padding: 2rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            border: 1px solid #eef2f6;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #0a1a3a;
+            border-left: 5px solid #3b82f6;
+            padding-left: 1rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+        }
+
+        .card {
+            background: #f9fafc;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid #eef2f8;
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #0f2b4f;
+        }
+
+        .promise-box {
+            background: #eaf7f0;
+            border-left: 6px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .legal-clause {
+            background: #fef9e6;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            font-size: 0.85rem;
+            border-radius: 0.75rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: #5a6874;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .section { padding: 1.5rem; }
+            .hero { padding: 2rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <div class="hero-badge">Hult Prize Campus Winners · Patent Pending</div>
+        <h1>NeroviaFlow</h1>
+        <div class="tagline">
+            From Waste to Wealth – One Drop at a Time.<br>
+            Non‑invasive leak detection for hotels. Zero false alarms.
+        </div>
+        <a href="#contact" class="btn">📩 Contact us</a>
+        <a href="#pricing" class="btn btn-outline">💰 See pricing</a>
+    </div>
+
+    <!-- Problem -->
+    <div class="section">
+        <h2 class="section-title">💧 The Problem</h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>Hidden leaks, invisible bills</h3>
+                <p>Hotels lose <strong>20‑40% of purchased water</strong> to leaks behind walls, faulty valves, and running toilets. No real‑time visibility. Facility managers only discover leaks after floods or when the bill arrives.</p>
+            </div>
+            <div class="card">
+                <h3>Morocco's water crisis</h3>
+                <p>Water availability dropped <strong>75% in one generation</strong> – from 2,560 m³ per person in 1960 to 606 m³ today. By 2030, absolute scarcity (<500 m³). Tariffs increased 40% last decade. Every drop counts.</p>
+            </div>
+        </div>
+        <p style="margin-top:1rem; font-size:0.9rem;">Globally, <strong>346 billion litres of treated water are lost every day</strong> – enough to end water poverty for millions. NeroviaFlow stops the waste where it starts: inside buildings.</p>
+    </div>
+
+    <!-- Solution -->
+    <div class="section">
+        <h2 class="section-title">⚙️ Our Solution</h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>Non‑invasive, intelligent monitoring</h3>
+                <p>We attach a <strong>clamp‑on ultrasonic flow meter</strong> externally to the main water pipe – no cutting, no plumber. A <strong>pressure sensor</strong> screws into an existing test valve. Both connect to a battery‑powered GSM gateway.</p>
+                <p style="margin-top:0.5rem;">✅ 1‑hour installation · ✅ Works in pits without WiFi · ✅ 30‑day baseline learning</p>
+            </div>
+            <div class="card">
+                <h3>Dual‑sensor leak detection</h3>
+                <p>During the night window (1‑4 AM), the system compares flow and pressure to the learned baseline. A leak is confirmed only when <strong>flow exceeds a threshold AND pressure drops simultaneously</strong> over several consecutive readings – <strong>zero false alarms</strong>.</p>
+                <p>📱 Instant SMS alert to facility manager. 💻 Live dashboard, monthly reports, optional ESG reporting.</p>
+            </div>
+        </div>
+        <div class="promise-box">
+            <p style="font-size:1.2rem; font-weight:700;">🔊 Optional acoustic sensor (upgrade)</p>
+            <p>For very small leaks that generate noise but minimal flow/pressure change, an acoustic vibration sensor can be added as a third confirmation channel – further improving detection reliability.</p>
+        </div>
+    </div>
+
+    <!-- Technology & Hardware -->
+    <div class="section">
+        <h2 class="section-title">📡 Technology & Hardware</h2>
+        <div class="grid-3">
+            <div class="card">
+                <h3>Clamp‑on ultrasonic flow meter</h3>
+                <p>Non‑invasive, attaches to any pipe (DN15‑DN50). Measures flow with ±1‑2% accuracy. 4‑20mA or pulse output.</p>
+            </div>
+            <div class="card">
+                <h3>Industrial pressure sensor</h3>
+                <p>0‑10 bar, 4‑20mA output, 1/4″ BSP thread – screws directly into existing test valve. Detects pressure drops that confirm leaks.</p>
+            </div>
+            <div class="card">
+                <h3>GSM + battery gateway</h3>
+                <p>ESP32 microcontroller, SIM800L GSM module, 18650 Li‑ion battery (30+ days autonomy). IP68 enclosure for pits/basements.</p>
+            </div>
+        </div>
+        <div class="legal-clause">
+            🔒 <strong>Patent pending (OMPIC)</strong> – The combination of non‑invasive flow + pressure + GSM + baseline learning with dual‑sensor confirmation is novel and protectable. Provisional patent filed April 2026.
+        </div>
+    </div>
+
+    <!-- Business model & pricing -->
+    <div class="section" id="pricing">
+        <h2 class="section-title">💰 Business Model</h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>Subscription tiers (monthly, HT)</h3>
+                <p><strong>Essential</strong> – $340/month<br>Leak detection, SMS alerts, basic dashboard</p>
+                <p><strong>Premium</strong> – $460/month<br>+ monthly reports, ESG reporting, priority support</p>
+                <p><strong>Installation fee:</strong> $50 (Y1-Y2), $100 from Y3 (HT)</p>
+                <p><strong>30‑day free trial</strong> – no risk, no commitment</p>
+                <p><strong>VAT:</strong> 20% added to invoices for VAT‑registered clients</p>
+            </div>
+            <div class="card">
+                <h3>Data monetisation (pure margin)</h3>
+                <p>Anonymised aggregate consumption data sold to water utilities, researchers, and infrastructure funds – <strong>$30/site/month</strong> from Y4 onward (HT).</p>
+                <p>Clients keep <strong>100% of water savings</strong> – no shared savings.</p>
+            </div>
+        </div>
+        <div class="legal-clause">
+            📊 <strong>Unit economics (Premium tier, first quarter)</strong><br>
+            Revenue: $570 (install + 1st month) · Cost: ~$52 (hardware amortised + battery + labor + opex)<br>
+            <strong>Net profit: $518 · Margin: 91%</strong><br>
+            Recurring monthly margin after hardware amortised: 97.8%.
+        </div>
+    </div>
+
+    <!-- Competitive advantage -->
+    <div class="section">
+        <h2 class="section-title">🏆 Unfair Advantage</h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>vs. Consumer devices (Bluebot, Phyn, Flo)</h3>
+                <p>Flow‑only → false alarms. Require WiFi and AC power. NeroviaFlow adds pressure confirmation, GSM, battery – works in pits, zero false positives.</p>
+            </div>
+            <div class="card">
+                <h3>vs. Industrial BMS (Honeywell, Siemens)</h3>
+                <p>Enterprise pricing, complex installation, not designed for 80‑room hotels. NeroviaFlow is affordable, non‑invasive, OpEx subscription.</p>
+            </div>
+            <div class="card">
+                <h3>vs. Acoustic‑only systems</h3>
+                <p>Acoustic detects noise but cannot quantify volume lost. NeroviaFlow measures flow + pressure → precise savings calculation.</p>
+            </div>
+            <div class="card">
+                <h3>First‑mover in hotel leak detection</h3>
+                <p>No direct competitor targets 50‑150 room hotels with non‑invasive flow+pressure+GSM+baseline learning. Our data moat grows with every installation.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Market opportunity -->
+    <div class="section">
+        <h2 class="section-title">📊 Market Opportunity</h2>
+        <div class="grid-3">
+            <div class="card">
+                <h3>TAM</h3>
+                <p><strong>$62.5B</strong><br>Global commercial water loss (20‑40% waste)</p>
+            </div>
+            <div class="card">
+                <h3>SAM</h3>
+                <p><strong>$62.5M</strong><br>Hotel leak detection market (2025), growing to $100M+ by 2030</p>
+            </div>
+            <div class="card">
+                <h3>SOM (Morocco target)</h3>
+                <p><strong>150+ hotels</strong> in Casablanca matching ICP. Annual potential: <strong>$540k</strong>.<br>Scaling to 2,000 sites by Y10 (2036).</p>
+            </div>
+        </div>
+        <p style="margin-top:1rem;">Global leak detection market: $521M in 2025 → $833M by 2035 (4.8% CAGR). Hotel segment accounts for 12%.</p>
+    </div>
+
+    <!-- Traction & roadmap -->
+    <div class="section">
+        <h2 class="section-title">🚀 Traction & Roadmap</h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>✅ Achieved (April 2026)</h3>
+                <ul style="margin-left:1.2rem;">
+                    <li>Hult Prize campus winners (EMSI Casablanca)</li>
+                    <li>Patent filed (OMPIC) – dual‑sensor + non‑invasive clamp‑on</li>
+                    <li>Working MVP: sensors, ESP32, GSM, data transmission</li>
+                    <li>Hotel survey: 2 interested (7/10), pilot negotiations ongoing</li>
+                    <li>Branding website live, domain secured</li>
+                    <li>Financial model aligned with Y1–Y10 (2027–2036)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🔜 Next 12 months (Y1)</h3>
+                <ul style="margin-left:1.2rem;">
+                    <li>Q2 2026: First pilot installation</li>
+                    <li>Q3 2026: Official launch, first paying customers</li>
+                    <li>Y1 (2027) target: <strong>20 sites</strong>, $48k revenue (HT), net profit after partner $0.9k</li>
+                    <li>Sleeping partner: $25k injection, 50% profit share until $50k repaid (by Y3)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="promise-box" style="margin-top:1rem;">
+            <strong>Fundraising scenario (prudent – 10 years):</strong><br>
+            • $25k sleeping partner (50% profit share until $50k repaid)<br>
+            • 20 sites in Y1 → 2,000 sites by Y10 (CAGR ~58%)<br>
+            • Y10 revenue (HT): <strong>$11.0M</strong> · Net profit after partner (HT): <strong>$6.7M</strong> · Net margin: <strong>61%</strong><br>
+            • Cash balance (TTC) Y10: <strong>$26.1M</strong> · Employees: 69 + founders<br>
+            • The company becomes self‑funding from Y2 onward.
+        </div>
+    </div>
+
+    <!-- Team -->
+    <div class="section">
+        <h2 class="section-title">👥 Team</h2>
+        <div class="grid-2">
+            <div class="card">
+                <h3>Rhari Yasmina</h3>
+                <p>Co‑founder & CTO – Data science, IoT, electronics, hardware development. Leads sensor integration and algorithm design.</p>
+            </div>
+            <div class="card">
+                <h3>Bentalha Zayd</h3>
+                <p>Co‑founder & CEO – Business strategy, finance, fundraising, sales. Leads market research, partnerships, and investor relations.</p>
+            </div>
+        </div>
+        <br>
+        <p>Both co‑founders have complementary skills and a proven track record (Hult Prize campus winners, patent filing, MVP assembled). Founders' indemnities are kept minimal in Y1‑Y2 ($6k total in Y1) to reinvest in growth.</p>
+    </div>
+
+    <!-- Financial highlights -->
+    <div class="section">
+        <h2 class="section-title">📈 Financial Highlights (Y1–Y10 Prudent Scenario)</h2>
+        <div class="grid-3">
+            <div class="card">
+                <h3>Y10 (2036) targets</h3>
+                <p><strong>2,000 sites</strong><br>$11.0M revenue (HT) · 61% net margin · $26.1M cash (TTC)</p>
+            </div>
+            <div class="card">
+                <h3>Unit economics (Premium)</h3>
+                <p>First month: $570 revenue, $52 cost → <strong>91% margin</strong><br>Recurring monthly: $460 revenue, $10 cost → <strong>97.8% margin</strong></p>
+            </div>
+            <div class="card">
+                <h3>Sleeping partner return</h3>
+                <p>$25k invested in Y1 · $50k total repaid by Y3 (100% return in 3 years)<br>Cash positive from Y2 · No additional capital needed</p>
+            </div>
+        </div>
+        <p style="margin-top:0.5rem;">All P&L figures are exclusive of VAT (HT). Cash flow figures are inclusive of VAT (TTC). Hardware amortised over 5 years, battery over 3 years. Dynamic contract mix (1‑3‑5 years) improves LTV. Headcount grows from 0 employees in Y1 to 69 by Y10.</p>
+    </div>
+
+    <!-- Call to action -->
+    <div id="contact" style="background: #0a1a3a; color: white; border-radius: 1.5rem; padding: 2rem; text-align: center; margin: 1rem 0 2rem;">
+        <p style="font-size: 1.4rem; font-weight: 600;">Ready to stop losing water – and money?</p>
+        <p style="margin: 0.5rem 0 1.5rem;">Contact us for a free 30‑day pilot at your hotel. No upfront cost. No risk.</p>
+        <a href="mailto:contact.neroviaflow@gmail.com" class="btn" style="background: #3b82f6;">📧 contact.neroviaflow@gmail.com</a>
+        <p style="margin-top: 1.5rem; font-size: 0.75rem; opacity: 0.7;">NeroviaFlow – From Waste to Wealth, One Drop at a Time</p>
+    </div>
+
+    <footer>
+        <p>© 2026 NeroviaFlow – Confidential – Investor‑grade one‑pager · v5.0 · OMPIC patent pending · Y1-Y10 financials aligned (20→2k sites, $25k sleeping partner, 50% profit share until $50k repaid)</p>
+    </footer>
+</div>
+
+<!-- Back to Index Button -->
+<div style="text-align: center; margin-top: 2rem; padding: 1rem;">
+    <a href="../index.html" style="display: inline-block; background: #0a192f; color: white; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 500; padding: 0.6rem 1.5rem; border-radius: 2rem; font-size: 0.8rem; border: 1px solid #2563eb; transition: 0.2s;">← Back to all documents</a>
+</div>
+</body>
+</html>

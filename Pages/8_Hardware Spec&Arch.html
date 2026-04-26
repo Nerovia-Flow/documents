@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>NeroviaFlow – Hardware Specifications & Architecture | Investor One‑Pager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f4f6fa;
+            color: #1a2c3e;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1.75rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+            padding: 2rem 2rem 2rem 2rem;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0a1a3a, #1e4a76);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.25rem;
+        }
+
+        .subhead {
+            color: #2c5a7a;
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+            margin: 0.5rem 0 1.5rem 0;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin: 2rem 0 1rem 0;
+            color: #0f2b4f;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0.4rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .card {
+            background: #f9fafc;
+            border-radius: 1rem;
+            padding: 1.2rem;
+            border: 1px solid #eef2f8;
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #0a1a3a;
+            border-left: 3px solid #3b82f6;
+            padding-left: 0.6rem;
+        }
+
+        .badge {
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 1rem;
+            display: inline-block;
+            margin-right: 0.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin: 0.8rem 0;
+        }
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 0.5rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background: #f1f5f9;
+            font-weight: 600;
+        }
+        code {
+            background: #eef2ff;
+            padding: 0.1rem 0.3rem;
+            border-radius: 0.3rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+        }
+        .diagram {
+            background: #f8fafc;
+            border: 1px dashed #94a3b8;
+            border-radius: 0.8rem;
+            padding: 1rem;
+            font-family: monospace;
+            font-size: 0.7rem;
+            white-space: pre;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+            padding-top: 1.5rem;
+        }
+        @media (max-width: 800px) {
+            .grid-2 { grid-template-columns: 1fr; }
+            .container { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>NeroviaFlow – Hardware Specifications & Architecture</h1>
+    <div class="subhead">Investor‑grade technical one‑pager – Sensors, microcontroller, power, enclosure, BOM, and installation – Confidential</div>
+
+    <!-- System block diagram (text) -->
+    <div class="section-title">📡 System hardware block diagram</div>
+    <div class="diagram">
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                               WATER PIPE                                   │
+└───────────────────┬─────────────────────────┬─────────────────────────────┘
+                    │                         │
+        ┌───────────▼───────────┐   ┌─────────▼───────────┐
+        │  Clamp‑on ultrasonic  │   │   Pressure sensor   │
+        │      flow meter       │   │   (4‑20mA, 0‑10 bar) │
+        │   (non‑invasive)      │   │   G1/4″ BSP thread   │
+        └───────────┬───────────┘   └─────────┬───────────┘
+                    │                         │
+                    └───────────┬─────────────┘
+                                │ (4‑20mA / pulse)
+                    ┌───────────▼───────────┐
+                    │   Signal conditioning │
+                    │   (250Ω resistor,      │
+                    │    voltage divider)    │
+                    └───────────┬───────────┘
+                                │ (0‑2.5V analog)
+                    ┌───────────▼───────────┐
+                    │   ESP32 WROOM‑32      │
+                    │   (microcontroller)   │
+                    └───────────┬───────────┘
+                                │ (UART)
+                    ┌───────────▼───────────┐
+                    │   SIM800L GSM module  │
+                    │   (2G/GSM)            │
+                    └───────────┬───────────┘
+                                │ (antenna)
+                                ▼
+                            Cellular tower
+                                │
+                                ▼
+                            NeroviaFlow Cloud
+    </div>
+
+    <!-- BOM (Bill of Materials) -->
+    <div class="section-title">📦 Bill of Materials (BOM) – per site (bulk pricing)</div>
+    <table>
+        <thead><tr><th>Component</th><th>Model / Specification</th><th>Qty</th><th>Unit cost (USD)</th><th>Total (USD)</th></tr></thead>
+        <tbody>
+            <tr><td>Clamp‑on ultrasonic flow meter</td><td>Sino‑Inst / LORRIC, DN15‑DN50, 4‑20mA, ±2% accuracy</td><td>1</td><td>350</td><td>350</td></tr>
+            <tr><td>Industrial pressure sensor</td><td>0‑10 bar, 4‑20mA, G1/4″ BSP, stainless steel</td><td>1</td><td>40</td><td>40</td></tr>
+            <tr><td>Acoustic sensor (optional)</td><td>Piezoelectric contact microphone, 20‑20kHz, 0‑5V output</td><td>1</td><td>15</td><td>15</td></tr>
+            <tr><td>ESP32 WROOM‑32</td><td>Development board, 4MB flash, WiFi/BT (WiFi unused)</td><td>1</td><td>5</td><td>5</td></tr>
+            <tr><td>SIM800L GSM module</td><td>Quad‑band, 2G, with antenna, SMA connector</td><td>1</td><td>6</td><td>6</td></tr>
+            <tr><td>18650 Li‑ion battery</td><td>2600 mAh, 3.7V, protected</td><td>1</td><td>3</td><td>3</td></tr>
+            <tr><td>TP4056 charger module</td><td>Micro‑USB, 1A charge, over‑charge protection</td><td>1</td><td>1</td><td>1</td></tr>
+            <tr><td>MOSFET 2N7000</td><td>N‑channel, logic level, for sensor power switching</td><td>2</td><td>0.15</td><td>0.30</td></tr>
+            <tr><td>Resistor 250Ω (1/4W)</td><td>For 4‑20mA to voltage conversion</td><td>2</td><td>0.02</td><td>0.04</td></tr>
+            <tr><td>Resistor 10kΩ (1/4W)</td><td>Voltage divider</td><td>2</td><td>0.02</td><td>0.04</td></tr>
+            <tr><td>1000µF electrolytic capacitor</td><td>16V, for GSM power smoothing</td><td>1</td><td>0.20</td><td>0.20</td></tr>
+            <tr><td>Custom PCB</td><td>Double‑layer, 5×7 cm, solder mask</td><td>1</td><td>5</td><td>5</td></tr>
+            <tr><td>IP68 waterproof enclosure</td><td>150×100×70 mm, with cable glands</td><td>1</td><td>12</td><td>12</td></tr>
+            <tr><td>Stainless steel hose clamp</td><td>Adjustable, 20‑50 mm</td><td>1</td><td>1</td><td>1</td></tr>
+            <tr><td>Aluminum L‑bracket</td><td>25×25 mm, for Hall sensor (optional)</td><td>1</td><td>0.5</td><td>0.5</td></tr>
+            <tr><td>PTFE tape</td><td>Thread sealant</td><td>1</td><td>0.2</td><td>0.2</td></tr>
+            <tr><td>Jumper wires & connectors</td><td>Female‑female, male‑female, Dupont</td><td>20</td><td>0.05</td><td>1</td></tr>
+        </tbody>
+    </table>
+    <div class="card" style="margin-top:0.5rem;"><strong>Total hardware cost (excl. optional acoustic): $424.28 → <span class="badge">~$425 per site</span></strong> (bulk 100+ units). Acoustic adds $15.</div>
+
+    <!-- Sensors detailed specs -->
+    <div class="section-title">🔬 Sensor specifications</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>💧 Clamp‑on ultrasonic flow meter</h3>
+            <p><span class="badge">Measurement</span> Volume flow rate (L/h, m³/h)<br>
+            <span class="badge">Accuracy</span> ±1‑2% of reading<br>
+            <span class="badge">Pipe size</span> DN15 – DN50 (½″ – 2″)<br>
+            <span class="badge">Output</span> 4‑20 mA (2‑wire) or pulse<br>
+            <span class="badge">Power</span> 10‑24 VDC (powered by ESP32 5V via conditioning)<br>
+            <span class="badge">Mounting</span> Clamp‑on, no pipe cutting<br>
+            <span class="badge">Media</span> Clean water, no particles required</p>
+        </div>
+        <div class="card">
+            <h3>📊 Industrial pressure sensor</h3>
+            <p><span class="badge">Range</span> 0 – 10 bar (gauge)<br>
+            <span class="badge">Output</span> 4‑20 mA (2‑wire)<br>
+            <span class="badge">Accuracy</span> ±0.25% full scale<br>
+            <span class="badge">Connection</span> 1/4″ BSP male thread<br>
+            <span class="badge">Wetted parts</span> Stainless steel 316L<br>
+            <span class="badge">Power</span> 10‑30 VDC (powered by ESP32 5V via boost? Actually 4‑20mA loop powered, we use 3.3V reference with 250Ω resistor – works)</p>
+        </div>
+        <div class="card">
+            <h3>🎙️ Acoustic sensor (optional)</h3>
+            <p><span class="badge">Type</span> Piezoelectric contact microphone<br>
+            <span class="badge">Frequency response</span> 20 Hz – 20 kHz<br>
+            <span class="badge">Output</span> 0‑5V analog (amplified)<br>
+            <span class="badge">Mounting</span> Epoxy or magnetic clamp on pipe surface<br>
+            <span class="badge">Power</span> 5V @ 5mA</p>
+        </div>
+        <div class="card">
+            <h3>🔋 Battery & power management</h3>
+            <p><span class="badge">Cell</span> 18650 Li‑ion (2600 mAh)<br>
+            <span class="badge">Nominal voltage</span> 3.7V<br>
+            <span class="badge">Charge circuit</span> TP4056 (micro‑USB, 1A)<br>
+            <span class="badge">Boost converter</span> MT3608 (to 5V for GSM module) – not always needed; SIM800L can run directly from Li‑ion (3.7‑4.2V).<br>
+            <span class="badge">Deep sleep current</span> ESP32 ~6 µA, SIM800L ~1 mA (powered down), sensors off (MOSFET).<br>
+            <span class="badge">Active current</span> ESP32 ~80 mA, sensors ~10 mA, GSM transmit ~200 mA (peaks 2A).</p>
+        </div>
+    </div>
+
+    <!-- Microcontroller & GSM -->
+    <div class="section-title">🧠 Microcontroller & communication</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>ESP32 WROOM‑32</h3>
+            <p><span class="badge">CPU</span> Dual‑core Xtensa LX6 @ 240 MHz<br>
+            <span class="badge">RAM</span> 520 KB SRAM<br>
+            <span class="badge">Flash</span> 4 MB (external)<br>
+            <span class="badge">ADC</span> 12‑bit, 18 channels (used for pressure, acoustic)<br>
+            <span class="badge">Digital I/O</span> Used for Hall sensor pulse counting, MOSFET control, GSM power key.<br>
+            <span class="badge">Deep sleep</span> Timer wake‑up (15 min).<br>
+            <span class="badge">Programming</span> Arduino / PlatformIO.</p>
+        </div>
+        <div class="card">
+            <h3>SIM800L GSM module</h3>
+            <p><span class="badge">Network</span> 2G (GSM/GPRS) – compatible with Maroc Telecom & Inwi.<br>
+            <span class="badge">Data rate</span> Up to 85.6 kbps (GPRS class 12).<br>
+            <span class="badge">Power supply</span> 3.7‑4.2V (direct from Li‑ion battery).<br>
+            <span class="badge">Power key</span> Controlled by ESP32 GPIO to turn on/off.<br>
+            <span class="badge">Antenna</span> SMA connector, external antenna for pit installations.<br>
+            <span class="badge">AT commands</span> Used for HTTP POST and SMS.</p>
+        </div>
+    </div>
+
+    <!-- Wiring diagram (text) -->
+    <div class="section-title">🔌 Wiring diagram (simplified)</div>
+    <div class="diagram">
+ESP32 pins:
+  - GPIO34 (ADC1_CH6) → pressure sensor (via 250Ω + voltage divider)
+  - GPIO35 (ADC1_CH7) → acoustic sensor (optional)
+  - GPIO32 → MOSFET gate (controls Hall sensor GND)
+  - GPIO33 → (optional) second MOSFET for acoustic power
+  - GPIO16 (UART2 RX) → SIM800L TX
+  - GPIO17 (UART2 TX) → SIM800L RX
+  - GPIO4 → SIM800L PWRKEY (pulse low to power on)
+  - 3.3V → Hall sensor VCC (always on? better via MOSFET)
+  - 5V → pressure sensor VCC (via 5V rail from battery boost? Actually SIM800L and sensors can be powered from Li‑ion directly. But ESP32 needs 5V? ESP32 can run from 3.7V (VIN). So we can use single Li‑ion for everything, with proper regulators.)
+
+Simpler: Li‑ion → ESP32 VIN (3.3V regulator on board). Li‑ion → SIM800L VCC (direct). Li‑ion → MT3608 boost to 5V for pressure sensor (if needed). Hall sensor and acoustic from 3.3V.
+
+Better to present a clean table:
+    </div>
+    <div class="card">
+        <h3>Power distribution</h3>
+        <ul style="margin-left: 1.2rem;">
+            <li>18650 Li‑ion → ESP32 VIN (through protection diode)</li>
+            <li>18650 Li‑ion → SIM800L VCC (direct, with 1000µF capacitor across VCC/GND)</li>
+            <li>18650 Li‑ion → TP4056 (charging)</li>
+            <li>ESP32 3.3V → Hall sensor (via MOSFET)</li>
+            <li>ESP32 3.3V → acoustic sensor (via MOSFET)</li>
+            <li>MT3608 boost (optional) 3.7V→5V → pressure sensor (4‑20mA loop powered from 5V + 250Ω resistor to ground).</li>
+        </ul>
+    </div>
+
+    <!-- Enclosure & environmental ratings -->
+    <div class="section-title">📦 Enclosure & environmental protection</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>IP68 waterproof box</h3>
+            <p><span class="badge">Material</span> ABS / Polycarbonate<br>
+            <span class="badge">Dimensions</span> 150×100×70 mm<br>
+            <span class="badge">Ingress protection</span> IP68 (immersion up to 1.5m for 30 min)<br>
+            <span class="badge">Cable glands</span> PG9 (4 pieces) for sensor wires, antenna, USB charging<br>
+            <span class="badge">Mounting</span> Wall or pit wall with screws / double‑sided tape<br>
+            <span class="badge">Temperature range</span> -20°C to +70°C</p>
+        </div>
+        <div class="card">
+            <h3>Pit installation considerations</h3>
+            <p>• Desiccant packs inside to prevent condensation.<br>
+            • Silicone sealant around lid edge.<br>
+            • Drip loops on external cables.<br>
+            • External antenna (magnetic base) for GSM if signal weak.<br>
+            • Hose clamp + L‑bracket for Hall sensor (if meter used).</p>
+        </div>
+    </div>
+
+    <!-- Installation steps -->
+    <div class="section-title">🛠️ Installation procedure (hardware)</div>
+    <ol style="margin-left: 1.5rem; margin-bottom:1rem;">
+        <li><strong>Site survey</strong> – Verify mechanical water meter, accessible pressure test valve, GSM signal, and space for enclosure.</li>
+        <li><strong>Mount flow meter</strong> – Clean pipe surface, apply acoustic gel, clamp transducers, secure with stainless steel strap.</li>
+        <li><strong>Install pressure sensor</strong> – Wrap PTFE tape, screw into test valve hand‑tight + ¼ turn.</li>
+        <li><strong>Optional acoustic sensor</strong> – Attach to pipe surface with epoxy or magnetic clamp.</li>
+        <li><strong>Prepare enclosure</strong> – Drill holes for cable glands, mount ESP32, SIM800L, battery, TP4056, and PCB inside.</li>
+        <li><strong>Wire connections</strong> – Follow wiring diagram, double‑check polarity, add 1000µF capacitor across SIM800L VCC/GND.</li>
+        <li><strong>Insert SIM card</strong> – Maroc Telecom or Inwi, data plan activated.</li>
+        <li><strong>Power up</strong> – Connect battery, USB charger (optional), verify LED status.</li>
+        <li><strong>Test GSM</strong> – Send test SMS via serial command.</li>
+        <li><strong>Close enclosure</strong> – Tighten glands, add desiccant, seal lid.</li>
+        <li><strong>Mount enclosure</strong> – On wall or pit side, secure with screws.</li>
+        <li><strong>Verify data</strong> – Wait 15 minutes, check cloud dashboard for first reading.</li>
+    </ol>
+
+    <!-- Reliability & maintenance -->
+    <div class="section-title">🔁 Reliability, maintenance & lifecycle</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Expected lifetime</h3>
+            <p>• Flow meter: 5‑10 years (no moving parts).<br>
+            • Pressure sensor: 5‑10 years (stainless steel diaphragm).<br>
+            • ESP32 / GSM: 5‑10 years (solid‑state).<br>
+            • Battery: 2‑3 years (rechargeable, 500 cycles).<br>
+            • Enclosure & glands: 10+ years.</p>
+        </div>
+        <div class="card">
+            <h3>Maintenance schedule</h3>
+            <p>• Monthly: Check battery voltage via dashboard.<br>
+            • Quarterly: Inspect enclosure seals, cable glands, sensor attachments.<br>
+            • Annually: Replace desiccant, test GSM signal.<br>
+            • Battery replacement every 2‑3 years (user‑replaceable via USB charging).</p>
+        </div>
+    </div>
+
+    <!-- Cost breakdown (hardware only) -->
+    <div class="section-title">💰 Hardware cost breakdown (scale)</div>
+    <table>
+        <thead><tr><th>Component category</th><th>Cost per site (USD)</th><th>Notes</th></tr></thead>
+        <tbody>
+            <tr><td>Flow measurement</td><td>350</td><td>Clamp‑on ultrasonic (bulk)</td></tr>
+            <tr><td>Pressure measurement</td><td>40</td><td>Industrial 4‑20mA</td></tr>
+            <tr><td>Acoustic (optional)</td><td>15</td><td>Contact microphone</td></tr>
+            <tr><td>Microcontroller & GSM</td><td>11</td><td>ESP32 + SIM800L + antenna</td></tr>
+            <tr><td>Power & charging</td><td>4</td><td>Battery + TP4056 + MOSFETs</td></tr>
+            <tr><td>Passive components & PCB</td><td>6</td><td>Resistors, capacitors, custom PCB</td></tr>
+            <tr><td>Enclosure & mounting</td><td>13</td><td>IP68 box, glands, clamp, bracket, PTFE</td></tr>
+            <tr><td>Wires & connectors</td><td>1</td><td>Jumper wires, heat shrink</td></tr>
+            <tr><td><strong>Total (without acoustic)</strong></td><td><strong>425</strong></td><td></td></tr>
+            <tr><td><strong>Total (with acoustic)</strong></td><td><strong>440</strong></td><td></td></tr>
+        </tbody>
+    </table>
+    <div class="card" style="margin-top:0.5rem;">Installation labor (1 hour technician) = $10/site. One‑time cost borne by NeroviaFlow, recouped via $50 installation fee (promotional).</div>
+
+    <!-- Suppliers -->
+    <div class="section-title">🏭 Hardware suppliers (recommended)</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>Flow meters</h3>
+            <p>Sino‑Inst (China), LORRIC (Taiwan), Q&T (China). Bulk orders 50+ units → $350/unit.</p>
+        </div>
+        <div class="card">
+            <h3>Pressure sensors</h3>
+            <p>Cynergy3, Balluff, TE Connectivity, or generic 4‑20mA transmitters ($40‑80).</p>
+        </div>
+        <div class="card">
+            <h3>Electronic components</h3>
+            <p>ASBIS Morocco (ESP32, GSM), Mouser, DigiKey, or local Derb Ghallef.</p>
+        </div>
+        <div class="card">
+            <h3>Enclosures & hardware</h3>
+            <p>Bricorama / Mr. Bricolage (Casablanca) or industrial electrical suppliers.</p>
+        </div>
+    </div>
+
+    <!-- Future hardware improvements -->
+    <div class="section-title">🚀 Planned hardware enhancements</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>4G/LTE module</h3>
+            <p>Replace SIM800L with SIM7000 (NB‑IoT) or SIM7600 (4G) for future‑proof connectivity when 2G sunsets.</p>
+        </div>
+        <div class="card">
+            <h3>Solar charging option</h3>
+            <p>Small 5V solar panel (1W) + MPPT controller for remote sites without AC access.</p>
+        </div>
+        <div class="card">
+            <h3>Integrated multi‑sensor PCB</h3>
+            <p>Custom board combining ESP32, GSM, power management, and signal conditioning to reduce assembly cost and size.</p>
+        </div>
+        <div class="card">
+            <h3>Second pressure sensor (zone isolation)</h3>
+            <p>Add pressure sensor at far end of building to help locate leak between two points (gradient detection).</p>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        🔹 NeroviaFlow – Hardware Specifications & Architecture · April 2026 · Confidential – For investors and technical partners.<br>
+        Schematics and PCB design files are available under NDA. All component prices are bulk estimates (100+ units).
+    </div>
+</div>
+
+<!-- Back to Index Button -->
+<div style="text-align: center; margin-top: 2rem; padding: 1rem;">
+    <a href="../index.html" style="display: inline-block; background: #0a192f; color: white; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 500; padding: 0.6rem 1.5rem; border-radius: 2rem; font-size: 0.8rem; border: 1px solid #2563eb; transition: 0.2s;">← Back to all documents</a>
+</div>
+</body>
+</html>

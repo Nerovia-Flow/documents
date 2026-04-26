@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeroviaFlow – Financial Statements (Y1-Y10) | Investor One‑Pager</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, monospace;
+            background: #f0f2f5;
+            color: #111827;
+            padding: 2rem 1rem;
+            line-height: 1.4;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 35px -10px rgba(0,0,0,0.15);
+            padding: 2rem 1.8rem;
+        }
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #0a2540;
+            border-left: 6px solid #0f5e9e;
+            padding-left: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        .subhead {
+            color: #2c5a7a;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.75rem;
+        }
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 1.5rem 0 1rem 0;
+            color: #0f2b4f;
+            background: #f8fafc;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.5rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .card-metric {
+            background: #f1f5f9;
+            border-radius: 0.75rem;
+            padding: 0.8rem;
+            text-align: center;
+        }
+        .metric-value {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #1e3a8a;
+        }
+        .table-responsive {
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.7rem;
+            font-family: 'Courier New', monospace;
+        }
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 0.5rem 0.3rem;
+            text-align: right;
+            vertical-align: top;
+        }
+        th {
+            background: #eef2ff;
+            font-weight: 700;
+            text-align: center;
+        }
+        .left {
+            text-align: left;
+            font-weight: 600;
+            background: #f9fafb;
+        }
+        .highlight {
+            background: #ecfdf5;
+            font-weight: 600;
+        }
+        .note {
+            background: #fef9e6;
+            border-left: 4px solid #f59e0b;
+            padding: 0.8rem;
+            margin: 1rem 0;
+            font-size: 0.7rem;
+            border-radius: 0.5rem;
+        }
+        .badge {
+            background: #dbeafe;
+            color: #1e40af;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.2rem 0.5rem;
+            border-radius: 1rem;
+            display: inline-block;
+        }
+        footer {
+            margin-top: 2rem;
+            font-size: 0.65rem;
+            text-align: center;
+            color: #6c757d;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1rem;
+        }
+        @media (max-width: 800px) {
+            .container { padding: 1rem; }
+            table { font-size: 0.55rem; }
+            th, td { padding: 0.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>NeroviaFlow – Financial Statements (Y1-Y10)</h1>
+    <div class="subhead">All figures in USD thousands (except per‑unit prices and headcount) – P&L in HT, Balance Sheet in HT – Prudent scenario: 20 → 2,000 sites, $25k sleeping partner, 80% of clients pay in 90 days</div>
+
+    <!-- ========== 1. ASSUMPTIONS ========== -->
+    <div class="section-title">🔍 1. KEY ASSUMPTIONS (confirmed)</div>
+    <div class="grid-2">
+        <div class="card-metric"><div class="metric-value">Site growth</div>20 → 2,000 sites by Y10</div>
+        <div class="card-metric"><div class="metric-value">Blended monthly subscription (HT)</div>$412/site</div>
+        <div class="card-metric"><div class="metric-value">Installation fee (HT)</div>$50 (Y1-Y2), $100 (Y3+)</div>
+        <div class="card-metric"><div class="metric-value">Hardware + install per site (HT)</div>$446 (expensed to COGS)</div>
+        <div class="card-metric"><div class="metric-value">GSM & cloud opex (HT)</div>$80/year per active site</div>
+        <div class="card-metric"><div class="metric-value">Technician field service (HT)</div>$40/year per active site</div>
+        <div class="card-metric"><div class="metric-value">Client payment terms</div>80% after 90 days, 20% after 30 days</div>
+        <div class="card-metric"><div class="metric-value">Supplier payment</div>0 days (upon installation)</div>
+        <div class="card-metric"><div class="metric-value">Sleeping partner injection (Y1)</div>$25k (TTC)</div>
+        <div class="card-metric"><div class="metric-value">Profit share</div>50% of net profit (HT) until $50k repaid</div>
+        <div class="card-metric"><div class="metric-value">Founders' indemnities (total)</div>Y1 $6k, Y2 $12k, then +10% yearly to $66k Y10</div>
+        <div class="card-metric"><div class="metric-value">Software intangible</div>$100k constant, no amortisation</div>
+        <div class="card-metric"><div class="metric-value">VAT</div>20% – P&L in HT, Cash flow in TTC (salaries no VAT)</div>
+    </div>
+
+    <!-- ========== 2. SITE GROWTH ========== -->
+    <div class="section-title">📈 2. SITE GROWTH (end of year)</div>
+    <div class="table-responsive">
+        <table>
+            <thead><tr><th>Year</th><th>Y1</th><th>Y2</th><th>Y3</th><th>Y4</th><th>Y5</th><th>Y6</th><th>Y7</th><th>Y8</th><th>Y9</th><th>Y10</th></tr></thead>
+            <tbody><tr><td class="left">Sites (end of year)</td><td class="left">20</td><td class="left">50</td><td class="left">100</td><td class="left">200</td><td class="left">400</td><td class="left">700</td><td class="left">1,000</td><td class="left">1,300</td><td class="left">1,600</td><td class="left">2,000</td></tr></tbody>
+        </table>
+    </div>
+
+    <!-- ========== 3. HEADCOUNT ========== -->
+    <div class="section-title">👥 3. HEADCOUNT (full‑time employees, founders not counted)</div>
+    <div class="table-responsive">
+        <table>
+            <thead><tr><th>Role</th><th>Y1</th><th>Y2</th><th>Y3</th><th>Y4</th><th>Y5</th><th>Y6</th><th>Y7</th><th>Y8</th><th>Y9</th><th>Y10</th></tr></thead>
+            <tbody>
+                <tr><td class="left">Field technicians</td><td class="left">0</td><td class="left">2</td><td class="left">3</td><td class="left">5</td><td class="left">8</td><td class="left">12</td><td class="left">18</td><td class="left">25</td><td class="left">32</td><td class="left">40</td></tr>
+                <tr><td class="left">Sales & account managers</td><td class="left">0</td><td class="left">0</td><td class="left">1</td><td class="left">2</td><td class="left">3</td><td class="left">5</td><td class="left">7</td><td class="left">10</td><td class="left">13</td><td class="left">16</td></tr>
+                <tr><td class="left">Software developers</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td></tr>
+                <tr><td class="left">Admin / HR / finance</td><td class="left">0</td><td class="left">1</td><td class="left">2</td><td class="left">3</td><td class="left">4</td><td class="left">5</td><td class="left">6</td><td class="left">7</td><td class="left">8</td><td class="left">9</td></tr>
+                <tr><td class="left">Management (non‑founder)</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">1</td><td class="left">1</td><td class="left">2</td><td class="left">2</td><td class="left">3</td><td class="left">3</td><td class="left">4</td></tr>
+                <tr><td class="left"><strong>Total employees</strong></td><td class="left"><strong>0</strong></td><td class="left"><strong>3</strong></td><td class="left"><strong>6</strong></td><td class="left"><strong>11</strong></td><td class="left"><strong>16</strong></td><td class="left"><strong>24</strong></td><td class="left"><strong>33</strong></td><td class="left"><strong>45</strong></td><td class="left"><strong>56</strong></td><td class="left"><strong>69</strong></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ========== 4. CAPEX (HT) ========== -->
+    <div class="section-title">🔨 4. CAPEX – USD thousands (yearly, HT)</div>
+    <div class="table-responsive">
+        <table>
+            <thead><tr><th>Component</th><th>Y1</th><th>Y2</th><th>Y3</th><th>Y4</th><th>Y5</th><th>Y6</th><th>Y7</th><th>Y8</th><th>Y9</th><th>Y10</th></tr></thead>
+            <tbody>
+                <tr><td class="left">Office equipment & computers</td><td class="left">2</td><td class="left">3</td><td class="left">5</td><td class="left">7</td><td class="left">10</td><td class="left">14</td><td class="left">18</td><td class="left">23</td><td class="left">28</td><td class="left">34</td></tr>
+                <tr><td class="left">Company formation fee (capitalised)</td><td class="left">1.5</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td></tr>
+                <tr><td class="left"><strong>Total CAPEX</strong></td><td class="left"><strong>3.5</strong></td><td class="left"><strong>3</strong></td><td class="left"><strong>5</strong></td><td class="left"><strong>7</strong></td><td class="left"><strong>10</strong></td><td class="left"><strong>14</strong></td><td class="left"><strong>18</strong></td><td class="left"><strong>23</strong></td><td class="left"><strong>28</strong></td><td class="left"><strong>34</strong></td></tr>
+            </tbody>
+        </table>
+        <br>
+        <p class="note" style="margin-top:0;">Hardware is expensed to COGS (not capitalised). Software intangible ($100k) added to balance sheet from Y1 (non‑cash).</p>
+    </div>
+
+    <!-- ========== 5. OPEX (HT) – detailed ========== -->
+    <div class="section-title">📋 5. OPERATING EXPENSES – USD thousands (yearly, HT)</div>
+    <div class="table-responsive">
+        <table>
+            <thead><tr><th>Expense line</th><th>Y1</th><th>Y2</th><th>Y3</th><th>Y4</th><th>Y5</th><th>Y6</th><th>Y7</th><th>Y8</th><th>Y9</th><th>Y10</th></tr></thead>
+            <tbody>
+                <tr><td class="left">Salaries & wages (employees)</td><td class="left">0</td><td class="left">22</td><td class="left">46</td><td class="left">92</td><td class="left">142</td><td class="left">230</td><td class="left">360</td><td class="left">560</td><td class="left">820</td><td class="left">1,190</td></tr>
+                <tr><td class="left">Social charges (22% of salaries)</td><td class="left">0</td><td class="left">5</td><td class="left">10</td><td class="left">20</td><td class="left">31</td><td class="left">51</td><td class="left">79</td><td class="left">123</td><td class="left">180</td><td class="left">262</td></td>
+                <tr><td class="left">Founders' indemnities</td><td class="left">6</td><td class="left">12</td><td class="left">24</td><td class="left">30</td><td class="left">36</td><td class="left">42</td><td class="left">48</td><td class="left">54</td><td class="left">60</td><td class="left">66</td></tr>
+                <tr><td class="left">Recruitment & training</td><td class="left">2</td><td class="left">4</td><td class="left">6</td><td class="left">9</td><td class="left">13</td><td class="left">18</td><td class="left">24</td><td class="left">32</td><td class="left">42</td><td class="left">55</td></tr>
+                <tr><td class="left">Office rent & utilities</td><td class="left">0</td><td class="left">12</td><td class="left">13</td><td class="left">14</td><td class="left">15</td><td class="left">16</td><td class="left">17</td><td class="left">18</td><td class="left">19</td><td class="left">20</td></td>
+                <tr><td class="left">Travel & events</td><td class="left">20</td><td class="left">14</td><td class="left">9.8</td><td class="left">6.9</td><td class="left">4.8</td><td class="left">3.4</td><td class="left">2.4</td><td class="left">1.7</td><td class="left">1.2</td><td class="left">0.8</td></tr>
+                <tr><td class="left">Legal & accounting</td><td class="left">2</td><td class="left">3</td><td class="left">5</td><td class="left">8</td><td class="left">12</td><td class="left">18</td><td class="left">25</td><td class="left">35</td><td class="left">45</td><td class="left">60</td></tr>
+                <tr><td class="left">Insurance</td><td class="left">1</td><td class="left">2</td><td class="left">4</td><td class="left">7</td><td class="left">12</td><td class="left">18</td><td class="left">28</td><td class="left">40</td><td class="left">55</td><td class="left">75</td></td>
+                <tr><td class="left">IT & software subscriptions</td><td class="left">1</td><td class="left">3</td><td class="left">6</td><td class="left">12</td><td class="left">20</td><td class="left">35</td><td class="left">55</td><td class="left">85</td><td class="left">125</td><td class="left">180</td></tr>
+                <tr><td class="left">Bank charges (2.5% of subscriptions)</td><td class="left">1</td><td class="left">4</td><td class="left">9</td><td class="left">19</td><td class="left">37</td><td class="left">66</td><td class="left">106</td><td class="left">158</td><td class="left">211</td><td class="left">264</td></td>
+                <tr><td class="left">Marketing & events</td><td class="left">0</td><td class="left">5</td><td class="left">15</td><td class="left">30</td><td class="left">60</td><td class="left">100</td><td class="left">160</td><td class="left">250</td><td class="left">380</td><td class="left">540</td></td>
+                <tr><td class="left">Maintenance & repairs</td><td class="left">0</td><td class="left">1</td><td class="left">2</td><td class="left">4</td><td class="left">7</td><td class="left">11</td><td class="left">16</td><td class="left">23</td><td class="left">32</td><td class="left">43</td></td>
+                <tr><td class="left">OMPIC patent fees</td><td class="left">0.9</td><td class="left">0.12</td><td class="left">0.12</td><td class="left">0.12</td><td class="left">0.12</td><td class="left">0.19</td><td class="left">0.24</td><td class="left">0.29</td><td class="left">0.34</td><td class="left">0.48</td></td>
+                <tr><td class="left">Amortisation (company formation, office eq.)</td><td class="left">0.5</td><td class="left">0.7</td><td class="left">0.9</td><td class="left">1.1</td><td class="left">1.3</td><td class="left">1.6</td><td class="left">1.9</td><td class="left">2.3</td><td class="left">2.8</td><td class="left">3.4</td></td>
+                <tr><td class="left"><strong>Total OPEX (HT)</strong></td><td class="left"><strong>34.4</strong></td><td class="left"><strong>89.8</strong></td><td class="left"><strong>152.8</strong></td><td class="left"><strong>256</strong></td><td class="left"><strong>396</strong></td><td class="left"><strong>618</strong></td><td class="left"><strong>935</strong></td><td class="left"><strong>1,404</strong></td><td class="left"><strong>2,002</strong></td><td class="left"><strong>2,857</strong></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ========== 6. PROFIT & LOSS (HT, annual) ========== -->
+    <div class="section-title">📊 6. PROFIT & LOSS STATEMENT – USD thousands (yearly, HT)</div>
+    <div class="table-responsive">
+        <table>
+            <thead><tr><th>Line item</th><th>Y1</th><th>Y2</th><th>Y3</th><th>Y4</th><th>Y5</th><th>Y6</th><th>Y7</th><th>Y8</th><th>Y9</th><th>Y10</th></tr></thead>
+            <tbody>
+                <tr><td class="left"><strong>REVENUE (HT)</strong></td><td class="highlight">48</td><td class="highlight">164</td><td class="highlight">388</td><td class="highlight">860</td><td class="highlight">1,650</td><td class="highlight">2,900</td><td class="highlight">4,600</td><td class="highlight">6,800</td><td class="highlight">9,000</td><td class="highlight">11,000</td></tr>
+                <tr><td class="left">  Subscriptions</td><td class="left">47</td><td class="left">158</td><td class="left">375</td><td class="left">830</td><td class="left">1,590</td><td class="left">2,800</td><td class="left">4,450</td><td class="left">6,580</td><td class="left">8,700</td><td class="left">10,600</td></tr>
+                <tr><td class="left">  Installation fees</td><td class="left">1</td><td class="left">3</td><td class="left">8</td><td class="left">14</td><td class="left">23</td><td class="left">37</td><td class="left">55</td><td class="left">75</td><td class="left">85</td><td class="left">85</td></tr>
+                <tr><td class="left">  Data monetisation</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">16</td><td class="left">37</td><td class="left">63</td><td class="left">95</td><td class="left">145</td><td class="left">215</td><td class="left">315</td></tr>
+                <tr><td class="left">  Other</td><td class="left">0</td><td class="left">3</td><td class="left">5</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td></tr>
+                <tr><td class="left"><strong>COGS (HT)</strong></td><td class="left">(11)</td><td class="left">(35)</td><td class="left">(75)</td><td class="left">(150)</td><td class="left">(260)</td><td class="left">(430)</td><td class="left">(650)</td><td class="left">(920)</td><td class="left">(1,220)</td><td class="left">(1,450)</td></td>
+                <tr><td class="left"><strong>Gross Profit (HT)</strong></td><td class="left"><strong>37</strong></td><td class="left"><strong>129</strong></td><td class="left"><strong>313</strong></td><td class="left"><strong>710</strong></td><td class="left"><strong>1,390</strong></td><td class="left"><strong>2,470</strong></td><td class="left"><strong>3,950</strong></td><td class="left"><strong>5,880</strong></td><td class="left"><strong>7,780</strong></td><td class="left"><strong>9,550</strong></td></td>
+                <tr><td class="left">OPEX (from above)</td><td class="left">(34.4)</td><td class="left">(89.8)</td><td class="left">(152.8)</td><td class="left">(256)</td><td class="left">(396)</td><td class="left">(618)</td><td class="left">(935)</td><td class="left">(1,404)</td><td class="left">(2,002)</td><td class="left">(2,857)</td></tr>
+                <tr><td class="left">Depreciation (office equipment)</td><td class="left">(0.4)</td><td class="left">(0.6)</td><td class="left">(1.0)</td><td class="left">(1.4)</td><td class="left">(2.0)</td><td class="left">(2.8)</td><td class="left">(3.6)</td><td class="left">(4.6)</td><td class="left">(5.6)</td><td class="left">(6.8)</td></td>
+                <tr><td class="left"><strong>EBITDA</strong></td><td class="left"><strong>2.2</strong></td><td class="left"><strong>38.6</strong></td><td class="left"><strong>159.2</strong></td><td class="left"><strong>452.6</strong></td><td class="left"><strong>992</strong></td><td class="left"><strong>1,849.2</strong></td><td class="left"><strong>3,011.4</strong></td><td class="left"><strong>4,471.4</strong></td><td class="left"><strong>5,772.4</strong></td><td class="left"><strong>6,686.2</strong></td></tr>
+                <tr><td class="left"><strong>Net Profit Before Partner</strong></td><td class="left"><strong>1.8</strong></td><td class="left"><strong>38</strong></td><td class="left"><strong>158.2</strong></td><td class="left"><strong>451.2</strong></td><td class="left"><strong>990</strong></td><td class="left"><strong>1,846.4</strong></td><td class="left"><strong>3,007.8</strong></td><td class="left"><strong>4,466.8</strong></td><td class="left"><strong>5,766.8</strong></td><td class="left"><strong>6,679.4</strong></td></td>
+                <tr><td class="left">Partner share (50% until $50k repaid)</td><td class="left">(0.9)</td><td class="left">(19)</td><td class="left">(30.1)</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td></td>
+                <tr><td class="left"><strong>Net Profit After Partner</strong></td><td class="left"><strong>0.9</strong></td><td class="left"><strong>19</strong></td><td class="left"><strong>128.1</strong></td><td class="left"><strong>451.2</strong></td><td class="left"><strong>990</strong></td><td class="left"><strong>1,846.4</strong></td><td class="left"><strong>3,007.8</strong></td><td class="left"><strong>4,466.8</strong></td><td class="left"><strong>5,766.8</strong></td><td class="left"><strong>6,679.4</strong></td></td>
+                <tr><td class="left">Net Margin (after partner)</td><td class="left">1.9%</td><td class="left">11.6%</td><td class="left">33.0%</td><td class="left">52.5%</td><td class="left">60.0%</td><td class="left">63.7%</td><td class="left">65.4%</td><td class="left">65.7%</td><td class="left">64.1%</td><td class="left">60.7%</td></td>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ========== 7. BALANCE SHEET (HT, yearly) ========== -->
+    <div class="section-title">📋 7. BALANCE SHEET – USD thousands (yearly, HT)</div>
+    <div class="table-responsive">
+        <table>
+            <thead><tr><th>Assets</th><th>Y1</th><th>Y2</th><th>Y3</th><th>Y4</th><th>Y5</th><th>Y6</th><th>Y7</th><th>Y8</th><th>Y9</th><th>Y10</th></tr></thead>
+            <tbody>
+                <tr><td class="left">Cash (approximated from P&L + injection – distributions – CAPEX)</td><td class="left">22.5</td><td class="left">38.5</td><td class="left">162.5</td><td class="left">608.5</td><td class="left">1,588.5</td><td class="left">3,418.5</td><td class="left">6,408.5</td><td class="left">10,868.5</td><td class="left">16,618.5</td><td class="left">23,298.5</td></tr>
+                <tr><td class="left">Accounts receivable (30‑day equivalent of subscriptions)</td><td class="left">4.0</td><td class="left">13.0</td><td class="left">31.0</td><td class="left">69.0</td><td class="left">133.0</td><td class="left">233.0</td><td class="left">371.0</td><td class="left">548.0</td><td class="left">725.0</td><td class="left">883.0</td></tr>
+                <tr><td class="left">Inventory (2 months of COGS)</td><td class="left">2.0</td><td class="left">6.0</td><td class="left">13.0</td><td class="left">25.0</td><td class="left">43.0</td><td class="left">72.0</td><td class="left">108.0</td><td class="left">153.0</td><td class="left">203.0</td><td class="left">242.0</td></td>
+                <tr><td class="left">Software intangible</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td></td>
+                <tr><td class="left">Office equipment (net)</td><td class="left">2.0</td><td class="left">4.0</td><td class="left">7.0</td><td class="left">11.0</td><td class="left">16.0</td><td class="left">23.0</td><td class="left">32.0</td><td class="left">43.0</td><td class="left">56.0</td><td class="left">70.0</td></td>
+                <tr><td class="left"><strong>Total assets</strong></td><td class="left"><strong>130.5</strong></td><td class="left"><strong>161.5</strong></td><td class="left"><strong>313.5</strong></td><td class="left"><strong>813.5</strong></td><td class="left"><strong>1,880.5</strong></td><td class="left"><strong>3,846.5</strong></td><td class="left"><strong>7,019.5</strong></td><td class="left"><strong>11,712.5</strong></td><td class="left"><strong>17,702.5</strong></td><td class="left"><strong>24,593.5</strong></td></tr>
+            </tbody>
+            <thead><tr><th>Liabilities & Equity</th><th>Y1</th><th>Y2</th><th>Y3</th><th>Y4</th><th>Y5</th><th>Y6</th><th>Y7</th><th>Y8</th><th>Y9</th><th>Y10</th></tr></thead>
+            <tbody>
+                <tr><td class="left">Accounts payable</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td><td class="left">0</td></tr>
+                <tr><td class="left">Accrued expenses</td><td class="left">6.0</td><td class="left">12.0</td><td class="left">24.0</td><td class="left">30.0</td><td class="left">36.0</td><td class="left">42.0</td><td class="left">48.0</td><td class="left">54.0</td><td class="left">60.0</td><td class="left">66.0</td>
+                <tr><td class="left">Paid‑in capital (sleeping partner)</td><td class="left">25.0</td><td class="left">25.0</td><td class="left">25.0</td><td class="left">25.0</td><td class="left">25.0</td><td class="left">25.0</td><td class="left">25.0</td><td class="left">25.0</td><td class="left">25.0</td><td class="left">25.0</td></tr>
+                <tr><td class="left">Retained earnings (after partner)</td><td class="left">0.9</td><td class="left">19.9</td><td class="left">148.0</td><td class="left">599.2</td><td class="left">1,589.2</td><td class="left">3,435.6</td><td class="left">6,443.4</td><td class="left">10,910.2</td><td class="left">16,677.0</td><td class="left">23,356.4</td></tr>
+                <tr><td class="left">Revaluation reserve (software)</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td><td class="left">100.0</td></tr>
+                <tr><td class="left"><strong>Total liabilities & equity</strong></td><td class="left"><strong>131.9</strong></td><td class="left"><strong>156.9</strong></td><td class="left"><strong>297.0</strong></td><td class="left"><strong>754.2</strong></td><td class="left"><strong>1,750.2</strong></td><td class="left"><strong>3,602.6</strong></td><td class="left"><strong>6,616.4</strong></td><td class="left"><strong>11,089.2</strong></td><td class="left"><strong>16,862.0</strong></td><td class="left"><strong>23,547.4</strong></td></tr>
+            </tbody>
+        </table>
+        <p class="note">Note: Cash balance is approximated from P&L net profit after partner + sleeping partner injection – CAPEX – partner distributions. The exact cash flow including VAT and working capital is presented in the separate cash flow statement (file 6). The balance sheet above is for HT representation only; the statutory balance sheet would include VAT accounts.</p>
+    </div>
+
+    <div class="note">
+        <strong>🔍 Summary (P&L HT):</strong><br>
+        • Y1 revenue $48k, net profit after partner $0.9k.<br>
+        • Sleeping partner $25k injection, repaid $50k over Y1-Y3.<br>
+        • From Y2 onward, the company is highly profitable and self‑funding.<br>
+        • Detailed cash flow (TTC) is provided in file 6.
+    </div>
+
+    <footer>
+        🔹 NeroviaFlow – Financial Statements (Y1-Y10) · April 2026 · Confidential – For investors and internal use.<br>
+        Full Excel model available upon request.
+    </footer>
+</div>
+
+<!-- Back to Index Button -->
+<div style="text-align: center; margin-top: 2rem; padding: 1rem;">
+    <a href="../index.html" style="display: inline-block; background: #0a192f; color: white; text-decoration: none; font-family: 'Inter', sans-serif; font-weight: 500; padding: 0.6rem 1.5rem; border-radius: 2rem; font-size: 0.8rem; border: 1px solid #2563eb; transition: 0.2s;">← Back to all documents</a>
+</div>
+</body>
+</html>
