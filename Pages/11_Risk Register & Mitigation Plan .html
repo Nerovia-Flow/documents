@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>NeroviaFlow – Risk Register & Mitigation Plan | Investor One‑Pager</title>
+    <title>NeroviaFlow – Risk Register & Mitigation Plan (Enhanced) | Investor One‑Pager</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -20,7 +21,7 @@
         }
 
         .container {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
             border-radius: 1.75rem;
@@ -122,6 +123,21 @@
             background: #e6f7ec;
             color: #166534;
         }
+        .emv {
+            font-family: monospace;
+            font-weight: 700;
+        }
+        .heatmap-container {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            border: 1px solid #e2e8f0;
+        }
+        canvas {
+            max-height: 400px;
+            width: 100%;
+        }
 
         .footer-note {
             margin-top: 2rem;
@@ -141,23 +157,23 @@
 </head>
 <body>
 <div class="container">
-    <h1> NeroviaFlow – Risk Register & Mitigation Plan</h1>
-    <div class="subhead">Comprehensive risk assessment – Technical, market, financial, legal, operational – April 2026 (aligned with Y1-Y10 financial model)</div>
+    <h1>NeroviaFlow – Risk Register & Mitigation Plan (Enhanced)</h1>
+    <div class="subhead">Comprehensive risk assessment – Quantitative EMV, sensitivity analysis, heat map – Aligned with final financial model (20 → 2,000 sites, $25k sleeping partner, 50% profit share until $50k repaid)</div>
 
-    <!-- Risk overview table (summary) -->
-    <div class="section-title">📊 Risk matrix – severity & probability</div>
+    <!-- 1. Risk matrix legend -->
+    <div class="section-title">📊 Risk scoring & expected monetary value (EMV)</div>
     <div class="grid-2">
         <div class="card">
-            <h3>Risk scoring legend</h3>
+            <h3>Scoring legend</h3>
             <p><span class="badge high">High</span> Probability >40% AND Impact >$100k or business‑critical.<br>
             <span class="badge medium">Medium</span> Probability 10‑40% OR impact $10k‑100k.<br>
             <span class="badge low">Low</span> Probability <10% OR impact <$10k.</p>
+            <p><strong>EMV (Expected Monetary Value)</strong> = Probability (%) × Impact ($). Represents the average financial loss expected per risk over the 10‑year projection.</p>
         </div>
         <div class="card">
             <h3>Key mitigations at a glance</h3>
             <ul style="margin-left: 1.2rem;">
-                <li>Patent pending (OMPIC) – protects core IP.</li>
-                <li>Trade secret (666.html) – prevents replication even after patent expiry.</li>
+                <li>Patent pending (OMPIC) + trade secret (666.html).</li>
                 <li>Dynamic contract mix (1‑3‑5 years) reduces churn.</li>
                 <li>Multiple hardware suppliers to avoid single source failure.</li>
                 <li>Zero‑overhead phase (first 15 sites) cushions financial risk.</li>
@@ -168,95 +184,113 @@
         </div>
     </div>
 
-    <!-- 1. Technical risks -->
-    <div class="section-title">🔧 Technical risks</div>
+    <!-- 2. Detailed risk table with EMV (technical, market, financial, legal, operational) -->
+    <div class="section-title">📋 Risk register with quantitative EMV</div>
     <table>
-        <thead><tr><th>Risk description</th><th>Probability</th><th>Impact</th><th>Mitigation</th><th>Contingency</th></tr></thead>
+        <thead>
+            <tr><th>Risk description</th><th>Probability</th><th>Impact (USD)</th><th>EMV (USD)</th><th>Mitigation</th><th>Contingency</th></tr>
+        </thead>
         <tbody>
-            <tr><td>GSM network coverage gaps in underground pits (2G sunset by 2030).</td><td class="risk-level medium">Medium</td><td class="risk-level medium">Medium</td><td>Use LoRaWAN backup or 4G module (SIM7000) as upgrade. Pre‑survey signal before installation.</td><td>Install external high‑gain antenna; fallback to store‑and‑forward with delayed alerts.</td></tr>
-            <tr><td>Battery life shorter than expected (claims 30 days, actual 20 days).</td><td class="risk-level medium">Medium</td><td class="risk-level medium">Medium</td><td>Optimise deep sleep; use low‑power sensors; implement dynamic reporting interval (5‑30 min).</td><td>Add solar trickle charger or replace with larger battery (3400 mAh).</td></tr>
-            <tr><td>Clamp‑on flow meter misalignment due to pipe vibrations.</td><td class="risk-level low">Low</td><td class="risk-level medium">Medium</td><td>Use rigid stainless steel bracket + hose clamp; secure cables.</td><td>Remote recalibration via firmware; technician visit if persistent error.</td></tr>
-            <tr><td>Water ingress in enclosure (IP68 failure).</td><td class="risk-level low">Low</td><td class="risk-level high">High</td><td>IP68 certified box + silicone sealant + desiccant packs. Pre‑installation pressure test.</td><td>Replace damaged electronics; warranty covers first year.</td></tr>
-            <tr><td>ESP32 firmware corruption during OTA update.</td><td class="risk-level low">Low</td><td class="risk-level medium">Medium</td><td>Dual‑bank OTA (factory backup). Validate CRC before applying update.</td><td>Manual recovery via USB‑serial (technician dispatched).</td></tr>
+            <!-- Technical risks -->
+            <tr><td>GSM network coverage gaps / 2G sunset by 2032</td><td class="risk-level medium">30%</td><td>$150k (lost site revenue + replacement)</td><td class="emv">$45,000</td><td>Use LoRaWAN backup or 4G module (SIM7000). Pre‑survey signal.</td><td>High‑gain antenna; store‑and‑forward; field upgrade to 4G.</td></tr>
+            <tr><td>Battery life shorter than expected (30 days → 20 days)</td><td class="risk-level medium">25%</td><td>$80k (additional site visits + battery replacement)</td><td class="emv">$20,000</td><td>Optimise deep sleep; dynamic reporting; low‑power sensors.</td><td>Solar trickle charger or larger battery (3400 mAh).</td></tr>
+            <tr><td>Clamp‑on flow meter misalignment</td><td class="risk-level low">5%</td><td>$20k (technician visits + recalibration)</td><td class="emv">$1,000</td><td>Rigid stainless steel bracket + hose clamp.</td><td>Remote recalibration via firmware; technician visit.</td></tr>
+            <tr><td>Water ingress in enclosure (IP68 failure)</td><td class="risk-level low">5%</td><td>$100k (device replacement + water damage claims)</td><td class="emv">$5,000</td><td>IP68 box + silicone sealant + desiccant.</td><td>Warranty replacement; insurance covers water damage.</td></tr>
+            <tr><td>ESP32 firmware corruption during OTA</td><td class="risk-level low">8%</td><td>$30k (field recovery + lost data)</td><td class="emv">$2,400</td><td>Dual‑bank OTA; CRC validation.</td><td>Manual USB‑serial recovery (technician dispatch).</td></tr>
+
+            <!-- Market & competitive risks -->
+            <tr><td>Large competitor (Honeywell, Siemens) launches similar solution</td><td class="risk-level medium">35%</td><td>$500k (market share loss, price pressure)</td><td class="emv">$175,000</td><td>First‑mover advantage + long‑term contracts (3‑5 years). Patent + trade secret.</td><td>Differentiate via OpEx model and non‑invasive install; lock in key hotels.</td></tr>
+            <tr><td>Customer inertia (“we already do manual checks”)</td><td class="risk-level high">50%</td><td>$100k (slower sales, higher CAC)</td><td class="emv">$50,000</td><td>30‑day free trial; prove savings with pilot data; case studies.</td><td>First‑year discount; extended trial; plumber referrals.</td></tr>
+            <tr><td>Price sensitivity due to economic downturn</td><td class="risk-level medium">30%</td><td>$80k (lower margins, churn)</td><td class="emv">$24,000</td><td>Essential tier at $340/mo; low entry barrier.</td><td>Quarterly payment plans; bundle ESG reporting as added value.</td></tr>
+            <tr><td>Slow adoption of data monetisation</td><td class="risk-level medium">30%</td><td>$60k (lost pure margin)</td><td class="emv">$18,000</td><td>Start after 100+ sites; pre‑engage with LYDEC/ONEE via MoUs.</td><td>Sell aggregated reports to research institutions or infrastructure funds.</td></tr>
+            <tr><td>Difficulty scaling from 20 to 2,000 sites (recruiting technicians)</td><td class="risk-level medium">40%</td><td>$200k (delayed growth, lost revenue)</td><td class="emv">$80,000</td><td>Staggered hiring plan: 0 → 69 employees by Y10. Partner with technical schools.</td><td>Outsource installation to certified third‑party IoT firms.</td></tr>
+
+            <!-- Financial risks -->
+            <tr><td>Hardware cost inflation (supply chain disruption)</td><td class="risk-level low">15%</td><td>$50k (reduced margins)</td><td class="emv">$7,500</td><td>Bulk purchasing agreements (12‑month fixed pricing). Alternative components pre‑qualified.</td><td>Pass 50% of increase to clients via subscription adjustment (contract allows +5% yearly).</td></tr>
+            <tr><td>Customer churn higher than expected (e.g., 15% instead of <5%)</td><td class="risk-level medium">25%</td><td>$300k (lost LTV over 10 years)</td><td class="emv">$75,000</td><td>Long‑term contracts (3‑5 years) with penalties. Monthly reports, QBRs.</td><td>Reactivate churned customers with discounted re‑engagement offer; analyse churn reasons.</td></tr>
+            <tr><td>Sleeping partner demands early exit or different terms</td><td class="risk-level low">10%</td><td>$50k (legal costs, reputation)</td><td class="emv">$5,000</td><td>Lock‑up agreement (5 years). Clear shareholder agreement with drag‑along/tag‑along clauses.</td><td>Buy out partner using retained earnings or new investor.</td></tr>
+            <tr><td>Slower site growth than projected (e.g., 1,000 sites instead of 2,000 by Y10)</td><td class="risk-level medium">30%</td><td>$2.5M (lost revenue over 10 years)</td><td class="emv">$750,000</td><td>Conservative base case already shows 2,000 sites. Lower growth still profitable.</td><td>Reduce marketing spend, extend timeline, still cash positive.</td></tr>
+            <tr><td>Founders' indemnities underestimation (Y1 $6k too low)</td><td class="risk-level low">5%</td><td>$10k (additional personal draw)</td><td class="emv">$500</td><td>Budgeted minimal; founders have other income sources.</td><td>Adjust indemnities from Y2 if needed.</td></tr>
+
+            <!-- Legal & regulatory risks -->
+            <tr><td>Patent rejection or prior art challenge</td><td class="risk-level low">15%</td><td>$100k (loss of IP protection, legal costs)</td><td class="emv">$15,000</td><td>Thorough prior art search; broad independent claims. Trade secret (666.html) protects regardless.</td><td>Amend claims; file continuation; rely on trade secrets.</td></tr>
+            <tr><td>Data privacy complaint (Law 09‑08) – client data leak</td><td class="risk-level low">10%</td><td>$200k (fines, legal defence, reputation)</td><td class="emv">$20,000</td><td>Encryption (TLS 1.3, AES‑256). Client owns raw data; only anonymised aggregates shared.</td><td>Immediate breach notification, legal defence via insurance. Delete compromised data.</td></tr>
+            <tr><td>Pressure sensor valve leak due to faulty installation</td><td class="risk-level low">5%</td><td>$50k (water damage claims)</td><td class="emv">$2,500</td><td>Installation checklist + PTFE tape. Technician training and certification.</td><td>Professional liability insurance covers water damage. Repair at no cost to client.</td></tr>
+            <tr><td>2G network sunset in Morocco (2032+)</td><td class="risk-level medium">40%</td><td>$150k (replacement of SIM800L modules)</td><td class="emv">$60,000</td><td>Modular hardware with 4G‑ready SIM7000.</td><td>Field upgrade program: replace SIM800L with 4G module at cost (phased over 2 years).</td></tr>
+
+            <!-- Operational & human risks -->
+            <tr><td>Key person dependency (founders)</td><td class="risk-level high">60%</td><td>$1M (loss of leadership, business continuity)</td><td class="emv">$600,000</td><td>Cross‑training; document all processes (code, sales, installation). Collapse protocol (999.html).</td><td>Hire second‑in‑command after scaling; key‑person insurance.</td></tr>
+            <tr><td>Technician shortage for installation/scaling to 2,000 sites</td><td class="risk-level medium">30%</td><td>$150k (delayed installations, lost revenue)</td><td class="emv">$45,000</td><td>Staggered hiring: 0 → 40 technicians by Y10. Partner with plumbing schools.</td><td>Outsource to third‑party IoT installation firms; train freelancers.</td></tr>
+            <tr><td>Plumber referral network not generating leads</td><td class="risk-level medium">25%</td><td>$30k (higher CAC, slower growth)</td><td class="emv">$7,500</td><td>$20/lead + bonus per conversion. Regular training and co‑marketing.</td><td>Shift focus to direct sales; increase referral fee to $30.</td></tr>
+            <tr><td>Difficulty recruiting software developers in Casablanca</td><td class="risk-level low">15%</td><td>$50k (higher salaries, delays)</td><td class="emv">$7,500</td><td>Competitive salaries ($15k‑$40k/year). Remote options from EU.</td><td>Expand recruitment to Rabat or Tangier; use freelance platforms.</td></tr>
         </tbody>
     </table>
 
-    <!-- 2. Market & competitive risks -->
-    <div class="section-title">🏨 Market & competitive risks</div>
-    <table>
-        <thead><tr><th>Risk description</th><th>Probability</th><th>Impact</th><th>Mitigation</th><th>Contingency</th></tr></thead>
-        <tbody>
-            <tr><td>Large competitor (e.g., Honeywell, Siemens) launches a similar hotel‑focused solution.</td><td class="risk-level medium">Medium</td><td class="risk-level high">High</td><td>First‑mover advantage + long‑term contracts (3‑5 years). Patent pending + trade secret. Focus on customer relationships and local support.</td><td>Differentiate via price (OpEx model) and non‑invasive installation. Aggressively expand to lock in key hotels.</td></tr>
-            <tr><td>Customer inertia ("we already do manual checks").</td><td class="risk-level high">High</td><td class="risk-level medium">Medium</td><td>30‑day free trial removes risk. Prove savings with pilot data. Showcase case studies from early adopters.</td><td>Offer first year discount or extended trial. Leverage plumber referrals.</td></tr>
-            <tr><td>Price sensitivity due to economic downturn.</td><td class="risk-level medium">Medium</td><td class="risk-level medium">Medium</td><td>Essential tier at $340/mo, low entry barrier. Installation fee $50 (promotional).</td><td>Introduce quarterly payment plans; bundle with ESG reporting as added value.</td></tr>
-            <tr><td>Slow adoption of data monetisation (utilities not buying data).</td><td class="risk-level medium">Medium</td><td class="risk-level low">Low</td><td>Start data monetisation only after 100+ sites (Y4); pre‑engage with LYDEC/ONEE via MoUs.</td><td>Pivot to selling aggregated reports to research institutions or infrastructure funds.</td></tr>
-            <tr><td>Difficulty scaling from 15 to 2,000 sites (recruiting technicians).</td><td class="risk-level medium">Medium</td><td class="risk-level medium">Medium</td><td>Staggered hiring plan: 0 → 77 employees by Y10. Partner with technical schools.</td><td>Outsource installation to certified third‑party IoT firms.</td></tr>
-        </tbody>
-    </table>
+    <!-- 3. Visual risk heat map (probability vs impact, bubble size = EMV) -->
+    <div class="section-title">🔥 Risk heat map (probability vs impact, bubble size = EMV)</div>
+    <div class="heatmap-container">
+        <canvas id="riskHeatMap" style="max-height: 500px;"></canvas>
+        <p style="font-size:0.7rem; margin-top:0.5rem;">Each bubble represents a risk. X‑axis = Impact (USD thousands), Y‑axis = Probability (%). Bubble size = EMV (larger = higher expected loss). Hover for details (desktop).</p>
+    </div>
 
-    <!-- 3. Financial risks (aligned with profitable Y1-Y10 model) -->
-    <div class="section-title">💰 Financial risks</div>
-    <table>
-        <thead><tr><th>Risk description</th><th>Probability</th><th>Impact</th><th>Mitigation</th><th>Contingency</th></tr></thead>
-        <tbody>
-            <tr><td>Hardware cost inflation (supply chain disruption).</td><td class="risk-level low">Low</td><td class="risk-level medium">Medium</td><td>Bulk purchasing agreements (12‑month fixed pricing). Alternative components pre‑qualified.</td><td>Pass 50% of increase to clients via slight subscription adjustment (contract allows +5% yearly).</td></tr>
-            <tr><td>Customer churn higher than expected (e.g., 15% instead of <5%).</td><td class="risk-level medium">Medium</td><td class="risk-level high">High</td><td>Long‑term contracts (3‑5 years) with penalties. Regular engagement (monthly reports, QBR).</td><td>Reactivate churned customers with discounted re‑engagement offer; analyse churn reasons.</td></tr>
-            <tr><td>Sleeping partner demands early exit or different terms.</td><td class="risk-level low">Low</td><td class="risk-level medium">Medium</td><td>Lock‑up agreement (5 years). Clear shareholder agreement with drag‑along/tag‑along clauses.</td><td>Buy out partner using retained earnings or new investor.</td></tr>
-            <tr><td>Slower site growth than projected (e.g., 1,000 sites instead of 2,000 by Y10).</td><td class="risk-level medium">Medium</td><td class="risk-level medium">Medium</td><td>Conservative base case already shows 2,000 sites. Lower growth still profitable.</td><td>Reduce marketing spend, extend timeline, still cash positive.</td></tr>
-            <tr><td>Developer or technician salary inflation.</td><td class="risk-level low">Low</td><td class="risk-level low">Low</td><td>Moroccan salaries are stable. Use remote talent if needed.</td><td>Adjust headcount growth or use freelancers.</td></tr>
-        </tbody>
-    </table>
-
-    <!-- 4. Legal & regulatory risks -->
-    <div class="section-title">⚖️ Legal & regulatory risks</div>
-    <table>
-        <thead><tr><th>Risk description</th><th>Probability</th><th>Impact</th><th>Mitigation</th><th>Contingency</th></tr></thead>
-        <tbody>
-            <tr><td>Patent rejection or prior art challenge.</td><td class="risk-level low">Low</td><td class="risk-level high">High</td><td>Thorough prior art search (Espacenet, Google Patents, IEEE). Drafted broad independent claims. Trade secret (666.html) protects core algorithm regardless.</td><td>Amend claims during examination; file continuation application. Rely on trade secrets.</td></tr>
-            <tr><td>Data privacy complaint (Law 09‑08) – client data leak.</td><td class="risk-level low">Low</td><td class="risk-level high">High</td><td>Data encryption (TLS 1.3, AES‑256). Client owns raw data; only anonymised aggregates shared.</td><td>Immediate breach notification, legal defense via insurance. Delete compromised data.</td></tr>
-            <tr><td>Pressure sensor valve leak due to faulty installation.</td><td class="risk-level low">Low</td><td class="risk-level medium">Medium</td><td>Installation checklist + PTFE tape. Technician training and certification.</td><td>Professional liability insurance covers water damage. Repair at no cost to client.</td></tr>
-            <tr><td>2G network sunset in Morocco (2032+).</td><td class="risk-level medium">Medium</td><td class="risk-level high">High</td><td>Design hardware with modular GSM (SIM800L) and future‑proof 4G module (SIM7000) ready.</td><td>Field upgrade program: replace SIM800L with 4G module at cost (phased over 2 years).</td></tr>
-        </tbody>
-    </table>
-
-    <!-- 5. Operational & human risks -->
-    <div class="section-title">👥 Operational & human risks</div>
-    <table>
-        <thead><tr><th>Risk description</th><th>Probability</th><th>Impact</th><th>Mitigation</th><th>Contingency</th></tr></thead>
-        <tbody>
-            <tr><td>Key person dependency (founders).</td><td class="risk-level high">High</td><td class="risk-level high">High</td><td>Cross‑training; document all processes (code, sales, installation). Collapse protocol (999.html) for worst case.</td><td>Hire second‑in‑command after scaling; buy key‑person insurance.</td></tr>
-            <tr><td>Technician shortage for installation/scaling to 2,000 sites.</td><td class="risk-level medium">Medium</td><td class="risk-level medium">Medium</td><td>Staggered hiring: 0 technicians Y1 → 40 by Y10. Partner with plumbing schools.</td><td>Outsource to third‑party IoT installation firms; train freelancers.</td></tr>
-            <tr><td>Plumber referral network not generating leads.</td><td class="risk-level medium">Medium</td><td class="risk-level low">Low</td><td>Offer $20/lead + bonus per conversion. Regular training and co‑marketing.</td><td>Shift focus to direct sales; increase referral fee to $30.</td></tr>
-            <tr><td>Difficulty recruiting software developers in Casablanca.</td><td class="risk-level low">Low</td><td class="risk-level medium">Medium</td><td>Competitive salaries ($15k‑$40k/year). Remote options from EU.</td><td>Expand recruitment to Rabat or Tangier; use freelance platforms.</td></tr>
-        </tbody>
-    </table>
-
-    <!-- 6. Risk register summary – top 5 risks (updated) -->
-    <div class="section-title">🎯 Top 5 priority risks (by risk score)</div>
+    <!-- 4. Sensitivity analysis (site growth -30%, hardware cost +20%) -->
+    <div class="section-title">📈 Sensitivity analysis – Impact on key financial metrics</div>
     <div class="grid-2">
         <div class="card">
-            <h3>1. Large competitor entry</h3>
-            <p><span class="badge high">Risk score 16/25</span> (High probability + High impact). Mitigation: lock in customers with 3‑5 year contracts, build brand loyalty, patent + trade secret protection.</p>
+            <h3>Scenario 1: Site growth 30% slower</h3>
+            <p>Y10 sites: 1,400 instead of 2,000.<br>
+            Y10 revenue: $7.7M (instead of $11.0M) → <strong>-30%</strong>.<br>
+            Y10 net profit after partner: $4.2M (instead of $6.7M) → <strong>-37%</strong>.<br>
+            Cash balance Y10: $18.3M (instead of $26.1M) → <strong>-30%</strong>.<br>
+            Still highly profitable; no additional capital required.</p>
         </div>
         <div class="card">
-            <h3>2. Customer churn</h3>
-            <p><span class="badge high">Risk score 15/25</span> Mitigation: long contracts (3‑5 years), proactive account management, monthly reports, QBRs.</p>
+            <h3>Scenario 2: Hardware cost +20% ($446 → $535/site)</h3>
+            <p>Y1 COGS: +$1.8k → net profit after partner Y1: $0.2k (instead of $0.9k).<br>
+            Y10 COGS: +$290k → net profit after partner Y10: $6.4M (instead of $6.7M) → <strong>-4.5%</strong>.<br>
+            Cash balance Y10: $25.0M (instead of $26.1M) → <strong>-4%</strong>.<br>
+            Minimal impact; margins remain high.</p>
         </div>
         <div class="card">
-            <h3>3. 2G network sunset</h3>
-            <p><span class="badge high">Risk score 14/25</span> Mitigation: modular hardware design, upgrade path to 4G, early testing of NB‑IoT.</p>
+            <h3>Scenario 3: Combined (slower growth + higher hardware cost)</h3>
+            <p>Y10 revenue: $7.7M, net profit after partner: $3.9M → <strong>-42%</strong>.<br>
+            Still cash‑positive; no need for additional external capital.<br>
+            The business remains viable even under adverse conditions.</p>
         </div>
         <div class="card">
-            <h3>4. Key person dependency</h3>
-            <p><span class="badge high">Risk score 14/25</span> Mitigation: documentation, cross‑training, key‑person insurance, collapse protocol.</p>
-        </div>
-        <div class="card">
-            <h3>5. Slower site growth than projected</h3>
-            <p><span class="badge medium">Risk score 12/25</span> Mitigation: conservative base case (2,000 sites by Y10). Lower growth still profitable. Adjust marketing spend.</p>
+            <h3>Scenario 4: Faster client payment (50% upfront, 50% net 30)</h3>
+            <p>Y1 monthly cash flow never negative. Ending cash Y1: +$28k instead of -$2k.<br>
+            No additional capital needed; improvement in liquidity.<br>
+            Recommended to negotiate better payment terms with hotels.</p>
         </div>
     </div>
 
-    <!-- Insurance & legal coverage -->
+    <!-- 5. Top 5 risks by EMV -->
+    <div class="section-title">🎯 Top 5 risks by Expected Monetary Value (EMV)</div>
+    <div class="grid-2">
+        <div class="card">
+            <h3>1. Key person dependency</h3>
+            <p><span class="badge high">EMV $600k</span> (Probability 60% × Impact $1M). Mitigation: cross‑training, documentation, collapse protocol, key‑person insurance.</p>
+        </div>
+        <div class="card">
+            <h3>2. Slower site growth than projected</h3>
+            <p><span class="badge high">EMV $750k</span>. Mitigation: conservative base case; still profitable. Adjust marketing spend.</p>
+        </div>
+        <div class="card">
+            <h3>3. Large competitor entry</h3>
+            <p><span class="badge high">EMV $175k</span>. Mitigation: lock in customers with 3‑5 year contracts, patent + trade secret.</p>
+        </div>
+        <div class="card">
+            <h3>4. Customer churn</h3>
+            <p><span class="badge high">EMV $75k</span>. Mitigation: long contracts, proactive account management, monthly reports.</p>
+        </div>
+        <div class="card">
+            <h3>5. 2G network sunset</h3>
+            <p><span class="badge medium">EMV $60k</span>. Mitigation: modular hardware, upgrade path to 4G.</p>
+        </div>
+    </div>
+
+    <!-- 6. Insurance & legal protections (existing) -->
     <div class="section-title">🛡️ Insurance & legal protections</div>
     <div class="grid-2">
         <div class="card">
@@ -277,7 +311,7 @@
         </div>
     </div>
 
-    <!-- Trade secret & collapse protocol protections -->
+    <!-- 7. Trade secret & collapse protocol protections -->
     <div class="section-title">🔒 Trade secret & collapse protocol protections</div>
     <div class="grid-2">
         <div class="card">
@@ -290,7 +324,7 @@
         </div>
     </div>
 
-    <!-- Risk monitoring & review -->
+    <!-- 8. Risk monitoring & review -->
     <div class="card" style="background:#eef2ff;">
         <h3>📅 Risk monitoring & review process</h3>
         <p>• Monthly risk review meeting (founders).<br>
@@ -302,11 +336,79 @@
     </div>
 
     <div class="footer-note">
-        🔹 NeroviaFlow – Risk Register & Mitigation Plan · April 2026 · Confidential – For investors and internal governance.<br>
-        This document is aligned with the Y1‑Y10 financial model (15 → 2,000 sites, profitable from Y1, no cash flow negative years).<br>
+        🔹 NeroviaFlow – Risk Register & Mitigation Plan (Enhanced) · April 2026 · Confidential – For investors and internal governance.<br>
+        This document is aligned with the Y1‑Y10 financial model (20 → 2,000 sites, profitable from Y1, no cash flow negative years).<br>
         Full risk matrix with quantitative scoring is available in the data room.
     </div>
 </div>
+
+<script>
+    // Risk heat map (scatter plot using Chart.js)
+    // Risk data: [impact (USD thousands), probability (%), EMV (USD thousands), label]
+    const risks = [
+        { label: "2G sunset", impact: 150, prob: 40, emv: 60 },
+        { label: "Battery life", impact: 80, prob: 25, emv: 20 },
+        { label: "Competitor entry", impact: 500, prob: 35, emv: 175 },
+        { label: "Customer inertia", impact: 100, prob: 50, emv: 50 },
+        { label: "Economic downturn", impact: 80, prob: 30, emv: 24 },
+        { label: "Data monetisation slow", impact: 60, prob: 30, emv: 18 },
+        { label: "Scaling technicians", impact: 200, prob: 40, emv: 80 },
+        { label: "Hardware inflation", impact: 50, prob: 15, emv: 7.5 },
+        { label: "Churn", impact: 300, prob: 25, emv: 75 },
+        { label: "Slower growth", impact: 2500, prob: 30, emv: 750 },
+        { label: "Patent rejection", impact: 100, prob: 15, emv: 15 },
+        { label: "Data leak", impact: 200, prob: 10, emv: 20 },
+        { label: "Key person", impact: 1000, prob: 60, emv: 600 },
+        { label: "Technician shortage", impact: 150, prob: 30, emv: 45 },
+        { label: "Plumber network", impact: 30, prob: 25, emv: 7.5 }
+    ];
+
+    const impactData = risks.map(r => r.impact);
+    const probData = risks.map(r => r.prob);
+    const emvData = risks.map(r => r.emv);
+    const labels = risks.map(r => r.label);
+
+    // Bubble chart (scatter with point radius = EMV scaled)
+    new Chart(document.getElementById('riskHeatMap'), {
+        type: 'bubble',
+        data: {
+            datasets: [{
+                label: 'Risks (bubble size = EMV)',
+                data: risks.map(r => ({ x: r.impact, y: r.prob, r: Math.sqrt(r.emv) * 1.2 })), // radius scaled for readability
+                backgroundColor: 'rgba(239, 68, 68, 0.6)',
+                borderColor: 'rgba(239, 68, 68, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            scales: {
+                x: {
+                    title: { display: true, text: 'Impact (USD thousands)', font: { size: 12 } },
+                    beginAtZero: true,
+                    max: 2700
+                },
+                y: {
+                    title: { display: true, text: 'Probability (%)', font: { size: 12 } },
+                    beginAtZero: true,
+                    max: 70
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: (ctx) => {
+                            const r = risks[ctx.dataIndex];
+                            return `${r.label}: Impact $${r.impact}k, Probability ${r.prob}%, EMV $${r.emv}k`;
+                        }
+                    }
+                },
+                legend: { display: false }
+            }
+        }
+    });
+</script>
 
 <!-- Back to Index Button -->
 <div style="text-align: center; margin-top: 2rem; padding: 1rem;">
